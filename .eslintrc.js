@@ -78,11 +78,17 @@ module.exports = {
     'redux-saga/no-yield-in-race': 2,
     'redux-saga/yield-effects': 2,
     'require-yield': 0,
+    'no-underscore-dangle': [2, { allow: ['_id'] }],
   },
   settings: {
     'import/resolver': {
       webpack: {
         config: './internals/webpack/webpack.prod.babel.js',
+      },
+    },
+    'prettier/prettier': {
+      error: {
+        endOfLine: 'auto',
       },
     },
   },
