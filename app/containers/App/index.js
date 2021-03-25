@@ -8,18 +8,17 @@
 
 import React, { Fragment } from 'react';
 import { Helmet } from 'react-helmet';
-import { Switch, Route } from 'react-router-dom';
-
-import HomePage from '../HomePage/Loadable';
-import FeaturePage from '../FeaturePage/Loadable';
+import { Switch, Route, withRouter } from 'react-router-dom';
+import Footer from 'components/Footer';
+import LoginPage from '../LoginPage';
+import FeaturePage from '../FeaturePage';
 import NotFoundPage from '../NotFoundPage/Loadable';
+import Customer from '../CustomerManagement/Customer';
 import Header from '../Layouts/Header';
 import Sidebar from '../Layouts/Sidebar';
-import Footer from 'components/Footer';
 
-
-export default function App() {
-  let myvar='';
+function App() {
+  const myvar = '';
   return (
     <Fragment>
       <Helmet
@@ -28,14 +27,16 @@ export default function App() {
       >
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
-      <Header />
-      <Sidebar />
+      {/* <Header /> */}
+      {/* <Sidebar /> */}
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/features" component={FeaturePage} />
+        <Route exact path="/" component={LoginPage} />
+        <Route exact path="/features" component={FeaturePage} />
+        <Route path="/customer" component={Customer} />
         <Route path="" component={NotFoundPage} />
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </Fragment>
   );
 }
+export default withRouter(App);

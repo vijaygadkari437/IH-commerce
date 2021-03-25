@@ -8,8 +8,8 @@ export default createMuiTheme({
     },
     primary: {
       light: '#ffffff',
-      main: '#4a4a4a',
-      dark: '#4a4a4a',
+      main: '#1c2260',
+      dark: '#1c2260',
     },
     secondary: {
       light: '#f1f5f9',
@@ -164,22 +164,6 @@ export default createMuiTheme({
       border: 'none',
       borderRadius: '5px',
     },
-  },
-  customer: {
-    bimbo: '#8999E9',
-    marketing: '#E2C188',
-    convotherm: '#6DD4C6',
-    weisheu: '#D4DE79',
-    debag: '#E28888',
-    extra1: '#88C9E2',
-    extra2: '#E288C1',
-    rewe: '#88E291',
-    extra3: '#648CA7',
-  },
-  alphabets: {
-    m: '#FFECBE',
-    h: '#FFBEBE',
-    l: '#CEF1D4',
   },
   spacing: factor =>
     [
