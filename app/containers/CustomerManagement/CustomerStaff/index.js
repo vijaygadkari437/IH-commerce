@@ -93,7 +93,7 @@ export default function CustomerStaff() {
       ListItemText: 'Customer Management',
       ListItemIcon: 'move_to_inbox',
       ListItemPath: '',
-    SubMenu: [
+      SubMenu: [
         {
           ListItemText: 'Customer',
           ListItemIcon: 'InboxIcon',
@@ -203,7 +203,7 @@ export default function CustomerStaff() {
                 </ListItemIcon>
                 <ListItemText primary={li.ListItemText} />
               </ListItem>
-              {li.SubMenu.map((li,i) => (
+              {li.SubMenu.map((li, i) => (
                 <Collapse in={openList} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
                     <ListItem
