@@ -116,7 +116,7 @@ export default function Login() {
           Log In
         </Button>
         <div className={classes.linkstyle}>
-          <Link to="/forgot-password">Forgot Password?</Link>
+          <Link to="/auth/forgot-password">Forgot Password?</Link>
         </div>
       </form>
     </Fragment>

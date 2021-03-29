@@ -14,6 +14,7 @@ import LoginPage from '../LoginPage';
 import FeaturePage from '../FeaturePage';
 import NotFoundPage from '../NotFoundPage/Loadable';
 import Customer from '../CustomerManagement/Customer';
+import CustomerStaff from '../CustomerManagement/CustomerStaff';
 import Header from '../Layouts/Header';
 import Sidebar from '../Layouts/Sidebar';
 
@@ -30,9 +31,10 @@ function App() {
       {/* <Header /> */}
       {/* <Sidebar /> */}
       <Switch>
-        <Route exact path="/" component={LoginPage} />
-        <Route exact path="/features" component={FeaturePage} />
+        <Route path="/auth" component={LoginPage} />
+        <Route path="/features" component={FeaturePage} />
         <Route path="/customer" component={Customer} />
+        <Route path="/customer-staff" component={CustomerStaff} />
         <Route path="" component={NotFoundPage} />
       </Switch>
       {/* <Footer /> */}

@@ -71,11 +71,10 @@ function LoginPage() {
         <Grid item xs={5}>
           <div className={classes.loginform}>
             <Switch>
-              <Route path="/login" component={Login} />
-              {/* <Route path="/logout" component={FeaturePage} /> */}
-              <Route path="/reset-password" component={ResetPassword} />
-              <Route path="/forgot-password" component={ForgotPassword} />
-              <Redirect from="/" to="/login" />
+              <Route path="/auth/login" component={Login} />
+              <Route path="/auth/reset-password" component={ResetPassword} />
+              <Route path="/auth/forgot-password" component={ForgotPassword} />
+              <Redirect from="/auth" to="/auth/login" />
             </Switch>
           </div>
         </Grid>

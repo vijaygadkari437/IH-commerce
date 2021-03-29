@@ -97,7 +97,7 @@ export default function ResetPassword() {
           Reset Password
         </Button>
         <div className={classes.flexButton}>
-          <Link to="/login">
+          <Link to="/auth/login">
             <Button variant="contained" color="secondary">
               Back to Login
             </Button>
