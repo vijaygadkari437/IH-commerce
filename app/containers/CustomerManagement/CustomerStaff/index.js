@@ -13,13 +13,13 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+// import InboxIcon from '@material-ui/icons/MoveToInbox';
 import { Collapse, Icon } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
+// import ExpandLess from '@material-ui/icons/ExpandLess';
+// import ExpandMore from '@material-ui/icons/ExpandMore';
+// import StarBorder from '@material-ui/icons/StarBorder';
 
 const drawerWidth = 260;
 
@@ -90,34 +90,43 @@ export default function CustomerStaff() {
   const theme = useTheme();
   const listItem = [
     {
+      ListKey: 'mainCustomer',
       ListItemText: 'Customer Management',
       ListItemIcon: 'move_to_inbox',
       ListItemPath: '',
       SubMenu: [
         {
+          ListKey: 'secondCustomer',
           ListItemText: 'Customer',
           ListItemIcon: 'InboxIcon',
           ListItemPath: '/customer',
-          SubMenu: [],
+          SubMenu: [
+            {
+              ListKey: 'customerStaff',
+              ListItemText: 'Customer Staff',
+              ListItemIcon: 'InboxIcon',
+              ListItemPath: '/customer',
+              SubMenu: [],
+            },
+          ],
         },
+
         {
-          ListItemText: 'Customer Staff',
-          ListItemIcon: 'InboxIcon',
-          ListItemPath: '/customer',
-          SubMenu: [],
-        },
-        {
+          ListKey: 'secondMerchant',
           ListItemText: 'Merchant',
           ListItemIcon: 'InboxIcon',
           ListItemPath: '/merchant',
-          SubMenu: [],
+          SubMenu: [
+            {
+              ListKey: 'merchantStaff',
+              ListItemText: 'Merchant Staff',
+              ListItemIcon: 'InboxIcon',
+              ListItemPath: '/merchant-staff',
+              SubMenu: [],
+            },
+          ],
         },
-        {
-          ListItemText: 'Merchant Staff',
-          ListItemIcon: 'InboxIcon',
-          ListItemPath: '/merchant-staff',
-          SubMenu: [],
-        },
+
         {
           ListItemText: 'User',
           ListItemIcon: 'InboxIcon',
@@ -128,9 +137,7 @@ export default function CustomerStaff() {
     },
   ];
   const [openDrawer, setOpenDrawer] = React.useState(true);
-  const [openList, setOpenList] = React.useState(false);
-  const [openList2, setOpenList2] = React.useState(false);
-
+  const [openList, setOpenList] = React.useState([]);
   const handleDrawerOpen = () => {
     setOpenDrawer(true);
   };
@@ -139,11 +146,19 @@ export default function CustomerStaff() {
     setOpenDrawer(false);
   };
 
-  const handleClick = () => {
-    setOpenList(!openList);
-  };
-  const handleClick1 = () => {
-    setOpenList2(!openList2);
+  const handleClick = menu => {
+    // console.log('handleClick called ', menu);
+    const newOpenList = [...openList];
+
+    if (newOpenList.includes(menu)) {
+      const index = newOpenList.indexOf(menu);
+      if (index > -1) {
+        newOpenList.splice(index, 1);
+      }
+    } else {
+      newOpenList.push(menu);
+    }
+    setOpenList(newOpenList);
   };
   return (
     <div className={classes.root}>
@@ -195,30 +210,56 @@ export default function CustomerStaff() {
         </div>
         <Divider />
         <List>
-          {listItem.map((li, i) => (
+          {listItem.map(li => (
             <Fragment>
-              <ListItem button onClick={handleClick}>
+              <ListItem button onClick={() => handleClick(li.ListKey)}>
                 <ListItemIcon>
                   <Icon>{li.ListItemIcon}</Icon>
                 </ListItemIcon>
                 <ListItemText primary={li.ListItemText} />
               </ListItem>
-              {li.SubMenu.map((li, i) => (
-                <Collapse in={openList} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    <ListItem
-                      button
-                      className={classes.nested}
-                      onClick={handleClick1}
-                    >
-                      <ListItemIcon>
-                        <Icon>{li.ListItemIcon}</Icon>
-                      </ListItemIcon>
-                      <ListItemText primary={li.ListItemText} />
-                    </ListItem>
-                  </List>
-                </Collapse>
-              ))}
+              <Collapse
+                in={openList.includes(li.ListKey)}
+                timeout="auto"
+                unmountOnExit
+              >
+                <List component="div" disablePadding>
+                  {li.SubMenu.map(subli => (
+                    <Fragment>
+                      <ListItem
+                        button
+                        className={classes.nested}
+                        onClick={() => handleClick(subli.ListKey)}
+                      >
+                        <ListItemIcon>
+                          <Icon>{subli.ListItemIcon}</Icon>
+                        </ListItemIcon>
+                        <ListItemText primary={subli.ListItemText} />
+                      </ListItem>
+                      <Collapse
+                        in={openList.includes(subli.ListKey)}
+                        timeout="auto"
+                        unmountOnExit
+                      >
+                        <List component="div" disablePadding>
+                          {subli.SubMenu.map(thirdli => (
+                            <ListItem
+                              button
+                              className={classes.nested}
+                              onClick={() => handleClick(thirdli.ListKey)}
+                            >
+                              <ListItemIcon>
+                                <Icon>{thirdli.ListItemIcon}</Icon>
+                              </ListItemIcon>
+                              <ListItemText primary={thirdli.ListItemText} />
+                            </ListItem>
+                          ))}
+                        </List>
+                      </Collapse>
+                    </Fragment>
+                  ))}
+                </List>
+              </Collapse>
             </Fragment>
           ))}
         </List>
