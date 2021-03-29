@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -13,13 +13,14 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import { Collapse, Icon } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
+import { withRouter } from 'react-router';
+
+// import ExpandLess from '@material-ui/icons/ExpandLess';
+// import ExpandMore from '@material-ui/icons/ExpandMore';
+// import StarBorder from '@material-ui/icons/StarBorder';
 
 const drawerWidth = 260;
 
@@ -85,11 +86,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CustomerStaff() {
+function CustomerStaff({ history }) {
   const classes = useStyles();
   const theme = useTheme();
   const listItem = [
     {
+      id: 1,
       ListItemText: 'Customer Management',
       ListItemIcon: 'move_to_inbox',
       ListItemPath: '',
@@ -103,7 +105,45 @@ export default function CustomerStaff() {
         {
           ListItemText: 'Customer Staff',
           ListItemIcon: 'InboxIcon',
+          ListItemPath: '/customer-staff',
+          SubMenu: [],
+        },
+        {
+          ListItemText: 'Merchant',
+          ListItemIcon: 'InboxIcon',
+          ListItemPath: '/merchant',
+          SubMenu: [],
+        },
+        {
+          ListItemText: 'Merchant Staff',
+          ListItemIcon: 'InboxIcon',
+          ListItemPath: '/merchant-staff',
+          SubMenu: [],
+        },
+        {
+          ListItemText: 'User',
+          ListItemIcon: 'InboxIcon',
+          ListItemPath: '/user',
+          SubMenu: [],
+        },
+      ],
+    },
+    {
+      id: 2,
+      ListItemText: 'Customer Management',
+      ListItemIcon: 'move_to_inbox',
+      ListItemPath: '',
+      SubMenu: [
+        {
+          ListItemText: 'Customer',
+          ListItemIcon: 'InboxIcon',
           ListItemPath: '/customer',
+          SubMenu: [],
+        },
+        {
+          ListItemText: 'Customer Staff',
+          ListItemIcon: 'InboxIcon',
+          ListItemPath: '/customer-staffs',
           SubMenu: [],
         },
         {
@@ -127,9 +167,8 @@ export default function CustomerStaff() {
       ],
     },
   ];
-  const [openDrawer, setOpenDrawer] = React.useState(true);
-  const [openList, setOpenList] = React.useState(false);
-  const [openList2, setOpenList2] = React.useState(false);
+  const [openDrawer, setOpenDrawer] = useState(true);
+  const [activeList, setActiveList] = useState([]);
 
   const handleDrawerOpen = () => {
     setOpenDrawer(true);
@@ -139,12 +178,21 @@ export default function CustomerStaff() {
     setOpenDrawer(false);
   };
 
-  const handleClick = () => {
-    setOpenList(!openList);
+  useEffect(() => {
+    console.log(activeList);
+  }, []);
+
+  const handleClick = i => {
+    if (activeList.includes(i)) {
+      activeList.indexOf(i) !== -1 &&
+        activeList.splice(activeList.indexOf(i), 1); // delete the present item
+      setActiveList([...activeList]); // set the new array without this item
+    } else {
+      activeList.length = 0;
+      setActiveList([...activeList, i]);
+    }
   };
-  const handleClick1 = () => {
-    setOpenList2(!openList2);
-  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -197,24 +245,28 @@ export default function CustomerStaff() {
         <List>
           {listItem.map((li, i) => (
             <Fragment>
-              <ListItem button onClick={handleClick}>
+              <ListItem button onClick={() => handleClick(li.id)}>
                 <ListItemIcon>
                   <Icon>{li.ListItemIcon}</Icon>
                 </ListItemIcon>
                 <ListItemText primary={li.ListItemText} />
               </ListItem>
-              {li.SubMenu.map((li, i) => (
-                <Collapse in={openList} timeout="auto" unmountOnExit>
+              {li.SubMenu.map(subLi => (
+                <Collapse
+                  in={activeList.includes(li.id)}
+                  timeout="auto"
+                  unmountOnExit
+                >
                   <List component="div" disablePadding>
                     <ListItem
                       button
                       className={classes.nested}
-                      onClick={handleClick1}
+                      // onClick={() => history.push(subLi.ListItemPath)}
                     >
                       <ListItemIcon>
-                        <Icon>{li.ListItemIcon}</Icon>
+                        <Icon>{subLi.ListItemIcon}</Icon>
                       </ListItemIcon>
-                      <ListItemText primary={li.ListItemText} />
+                      <ListItemText primary={subLi.ListItemText} />
                     </ListItem>
                   </List>
                 </Collapse>
@@ -230,3 +282,5 @@ export default function CustomerStaff() {
     </div>
   );
 }
+
+export default withRouter(CustomerStaff);
