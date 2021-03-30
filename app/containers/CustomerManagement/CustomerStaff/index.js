@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import React, { Fragment, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -179,7 +180,18 @@ function CustomerStaff({ history }) {
   };
 
   useEffect(() => {
-    console.log(activeList);
+    let cur = false;
+    for (let i = 0; i < listItem.length; i += 1) {
+      for (let j = 0; j < listItem[i].SubMenu.length; j += 1) {
+        // console.log(listItem[i].id); //demo to represt optimised code
+        if (listItem[i].SubMenu[j].ListItemPath === window.location.pathname) {
+          setActiveList([listItem[i].id]);
+          cur = true;
+          break;
+        }
+        if (cur) break;
+      }
+    }
   }, []);
 
   const handleClick = i => {
