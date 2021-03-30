@@ -1,50 +1,50 @@
-import React from 'react';
-// import TextBox from '../../components/TextBox';
-// import PasswordBox from '../../components/PasswordBox';
-// import PhoneNoBox from '../../components/PhoneNoBox';
-// import TitleSelect from '../../components/TitleSelect';
-// import Select2 from '../../components/Select2';
+import React, { Fragment, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { TextField } from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import Select from '@material-ui/core/Select';
+import { Collapse, Icon } from '@material-ui/core';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import { withRouter } from 'react-router';
+import Customer from '../CustomerManagement/Customer';
+// import ExpandLess from '@material-ui/icons/ExpandLess';
+// import ExpandMore from '@material-ui/icons/ExpandMore';
+// import StarBorder from '@material-ui/icons/StarBorder';
 
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
   appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
   appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: 36,
   },
   hide: {
     display: 'none',
@@ -52,111 +52,146 @@ const useStyles = makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    whiteSpace: 'nowrap',
   },
-  drawerPaper: {
+  drawerOpen: {
     width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
-  drawerHeader: {
+  drawerClose: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: theme.spacing(7) + 1,
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(9) + 1,
+    },
+  },
+  toolbar: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
-  customerforms: {
-    margin: 20,
-  },
-  customer3grid: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr',
-    gridColumnGap: 20,
-    gridRowGap: 20,
-  },
-  customer2grid: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 2fr',
-    gridColumnGap: 20,
-  },
-  customerfullwidth: {
-    gridColumnStart: 1,
-    gridColumnEnd: 4,
-    '& TextBox': {
-      width: '100%',
-    },
   },
 }));
 
-export default function PersistentDrawerLeft() {
+function CustomerManagement({ history }) {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  const fields = [
+  const listItem = [
     {
-      label: 'First name',
-      type: 'text',
-      value: '',
-    },
-    {
-      label: 'Last name',
-      type: 'text',
-      value: '',
-    },
-    {
-      label: 'Email',
-      type: 'email',
-      value: '',
-    },
-    {
-      label: 'Phone no',
-      type: 'number',
-      value: '',
-    },
-    {
-      label: 'Code',
-      type: 'autocomplete',
-      value: '',
-      selectOption: [
-        { title: 'The Shawshank Redemption' },
-        { title: 'The Godfather' },
-        { title: 'The Godfather: Part II' },
+      id: 1,
+      ListItemText: 'Customer Management',
+      ListItemIcon: 'manage_accounts',
+      ListItemPath: '',
+      SubMenu: [
+        {
+          ListItemText: 'Customer',
+          ListItemIcon: 'support_agent',
+          ListItemPath: '/customer',
+          SubMenu: [],
+        },
+        {
+          ListItemText: 'Customer Staff',
+          ListItemIcon: 'supervisor_account',
+          ListItemPath: '/customer-staff',
+          SubMenu: [],
+        },
+        {
+          ListItemText: 'Merchant',
+          ListItemIcon: 'point_of_sale',
+          ListItemPath: '/merchant',
+          SubMenu: [],
+        },
+        {
+          ListItemText: 'Merchant Staff',
+          ListItemIcon: 'supervisor_account',
+          ListItemPath: '/merchant-staff',
+          SubMenu: [],
+        },
+        {
+          ListItemText: 'User',
+          ListItemIcon: 'perm_identity',
+          ListItemPath: '/user',
+          SubMenu: [],
+        },
       ],
     },
     {
-      label: 'Country',
-      type: 'select',
-      value: '',
-      selectOption: [
-        { title: 'The Shawshank Redemption' },
-        { title: 'The Godfather' },
-        { title: 'The Godfather: Part II' },
+      id: 2,
+      ListItemText: 'Customer Management',
+      ListItemIcon: 'move_to_inbox',
+      ListItemPath: '',
+      SubMenu: [
+        {
+          ListItemText: 'Customer',
+          ListItemIcon: 'InboxIcon',
+          ListItemPath: '/customer',
+          SubMenu: [],
+        },
+        {
+          ListItemText: 'Customer Staff',
+          ListItemIcon: 'InboxIcon',
+          ListItemPath: '/customer-staffs',
+          SubMenu: [],
+        },
+        {
+          ListItemText: 'Merchant',
+          ListItemIcon: 'InboxIcon',
+          ListItemPath: '/merchant',
+          SubMenu: [],
+        },
+        {
+          ListItemText: 'Merchant Staff',
+          ListItemIcon: 'InboxIcon',
+          ListItemPath: '/merchant-staff',
+          SubMenu: [],
+        },
+        {
+          ListItemText: 'User',
+          ListItemIcon: 'InboxIcon',
+          ListItemPath: '/user',
+          SubMenu: [],
+        },
       ],
     },
   ];
+  const [openDrawer, setOpenDrawer] = useState(true);
+  const [activeList, setActiveList] = useState([]);
+
+  const handleDrawerOpen = () => {
+    setOpenDrawer(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpenDrawer(false);
+  };
+
+  useEffect(() => {
+    console.log(activeList);
+  }, []);
+
+  const handleClick = i => {
+    if (activeList.includes(i)) {
+      activeList.indexOf(i) !== -1 &&
+        activeList.splice(activeList.indexOf(i), 1); // delete the present item
+      setActiveList([...activeList]); // set the new array without this item
+    } else {
+      activeList.length = 0;
+      setActiveList([...activeList, i]);
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -164,7 +199,7 @@ export default function PersistentDrawerLeft() {
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
+          [classes.appBarShift]: openDrawer,
         })}
       >
         <Toolbar>
@@ -173,7 +208,9 @@ export default function PersistentDrawerLeft() {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
+            className={clsx(classes.menuButton, {
+              [classes.hide]: openDrawer,
+            })}
           >
             <MenuIcon />
           </IconButton>
@@ -183,103 +220,67 @@ export default function PersistentDrawerLeft() {
         </Toolbar>
       </AppBar>
       <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
+        variant="permanent"
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: openDrawer,
+          [classes.drawerClose]: !openDrawer,
+        })}
         classes={{
-          paper: classes.drawerPaper,
+          paper: clsx({
+            [classes.drawerOpen]: openDrawer,
+            [classes.drawerClose]: !openDrawer,
+          }),
         }}
       >
-        <div className={classes.drawerHeader}>
+        <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? (
-              <ChevronLeftIcon />
-            ) : (
+            {theme.direction === 'rtl' ? (
               <ChevronRightIcon />
+            ) : (
+              <ChevronLeftIcon />
             )}
           </IconButton>
         </div>
         <Divider />
         <List>
-          {[
-            'Customer',
-            'Customer Staff',
-            'Merchant',
-            'Merchant Staff',
-            'User',
-          ].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
-            </ListItem>
+          {listItem.map((li, i) => (
+            <Fragment>
+              <ListItem button onClick={() => handleClick(li.id)}>
+                <ListItemIcon>
+                  <Icon>{li.ListItemIcon}</Icon>
+                </ListItemIcon>
+                <ListItemText primary={li.ListItemText} />
+              </ListItem>
+              {li.SubMenu.map(subLi => (
+                <Collapse
+                  in={activeList.includes(li.id)}
+                  timeout="auto"
+                  unmountOnExit
+                >
+                  <List component="div" disablePadding>
+                    <ListItem
+                      button
+                      className={classes.nested}
+                      // onClick={() => history.push(subLi.ListItemPath)}
+                    >
+                      <ListItemIcon>
+                        <Icon>{subLi.ListItemIcon}</Icon>
+                      </ListItemIcon>
+                      <ListItemText primary={subLi.ListItemText} />
+                    </ListItem>
+                  </List>
+                </Collapse>
+              ))}
+            </Fragment>
           ))}
         </List>
       </Drawer>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      >
-        <div className={classes.drawerHeader} />
-        <div className={classes.customerforms}>
-          <h1>Customer</h1>
-          <div className={classes.customer3grid}>
-            {fields.map(f =>
-              f.type === 'autocomplete' ? (
-                <Autocomplete
-                  id="combo-box-demo"
-                  options={f.selectOption}
-                  getOptionLabel={option => option.title}
-                  renderInput={params => (
-                    <TextField {...params} label={f.label} variant="outlined" />
-                  )}
-                />
-              ) : f.type === 'select' ? (
-                <Select
-                  labelId="demo-simple-select-outlined-label"
-                  id="demo-simple-select-outlined"
-                  value={title}
-                  onChange={handleChange}
-                  label="Title"
-                />
-              ) : (
-                <TextField
-                  label={f.label}
-                  type={f.type}
-                  variant="outlined"
-                  autoComplete="off"
-                />
-              ),
-            )}
-            {/* <TitleSelect />
-            <TextBox label="First name" />
-            <TextBox label="Middle name" />
-            <TextBox label="Last name" />
-            <PasswordBox />
-            <TextBox label="E-mail" type="email" />
-            <PhoneNoBox />
-            <TextBox label="Phone no" />
-            <Select2 label="Business type" />
-            <TextBox label="Business name" />
-            <TextBox label="Business website" />
-            <TextBox label="Address" />
-            <Select2 label="Country/Region" />
-            <Select2 label="State/Province" />
-            <Select2 label="City" />
-            <TextBox label="Pincode" />
-            <Select2 label="Timezone" />
-            <Select2 label="Currency" />
-            <Select2 label="Company" />
-            <Select2 label="Entity" />
-            <TextBox label="Channel Partner name" />
-            <Select2 label="Category" />
-            <Select2 label="Persona" />
-            <Select2 label="Account manager" />
-            <TitleSelect />
-            <TextBox label="Tax Number" /> */}
-          </div>
-        </div>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        <Customer />
       </main>
     </div>
   );
 }
+
+export default withRouter(CustomerManagement);

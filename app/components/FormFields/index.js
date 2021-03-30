@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -18,11 +18,10 @@ import {
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Visibility from '@material-ui/icons/Visibility';
 import PhoneNoBox from '../PhoneNoBox';
+import Dropzone from '../Dropzone';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
-  // textField: {
-  //   width: '100%',
-  // },
   fullWidth: {
     gridColumnStart: 1,
     gridColumnEnd: 4,
@@ -35,13 +34,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function TextBox({
+export default function Form({
   label,
   selectOption,
   type,
   fieldType,
   value,
   addClass,
+  variant,
+  color,
+  fileClass,
 }) {
   const classes = useStyles();
   const [age, setAge] = React.useState('');
@@ -58,17 +60,26 @@ export default function TextBox({
   });
 
   const handleChangePassword = prop => event => {
-    setValues({ ...values, [prop]: event.target.value });
+    setValues({
+      ...values,
+      [prop]: event.target.value,
+    });
   };
   const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
   };
 
   const handleMouseDownPassword = event => {
     event.preventDefault();
   };
   const handleChangeCheckbox = event => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    setState({
+      ...state,
+      [event.target.name]: event.target.checked,
+    });
   };
 
   if (type === 'autocomplete') {
@@ -118,7 +129,9 @@ export default function TextBox({
           endAdornment={
             <InputAdornment
               position="end"
-              classes={{ root: classes.GlobalSize }}
+              classes={{
+                root: classes.GlobalSize,
+              }}
             >
               <IconButton
                 aria-label="toggle password visibility"
@@ -171,6 +184,18 @@ export default function TextBox({
   }
   if (type === 'phone') {
     return <PhoneNoBox label={label} type={fieldType} />;
+  }
+  if (type === 'dropzone') {
+    return <Dropzone label={label} />;
+  }
+  if (type === 'button') {
+    return (
+      <div>
+        <Button variant={variant} color={color}>
+          {label}
+        </Button>
+      </div>
+    );
   }
   if (addClass) {
     return (
