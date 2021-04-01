@@ -20,13 +20,21 @@ import { withRouter } from 'react-router';
 import Customer from '../CustomerManagement/Customer';
 // import ExpandLess from '@material-ui/icons/ExpandLess';
 // import ExpandMore from '@material-ui/icons/ExpandMore';
-// import StarBorder from '@material-ui/icons/StarBorder';
 
 const drawerWidth = 280;
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+  },
+  listItemIcon: {
+    minWidth: 40,
+  },
+  subListItem: {
+    paddingLeft: 30,
+  },
+  customcontainer: {
+    width: '100%',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -46,6 +54,7 @@ const useStyles = makeStyles(theme => ({
   menuButton: {
     marginRight: 36,
   },
+  customcontainer: {},
   hide: {
     display: 'none',
   },
@@ -80,10 +89,6 @@ const useStyles = makeStyles(theme => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
 }));
 
 function CustomerManagement({ history }) {
@@ -93,36 +98,36 @@ function CustomerManagement({ history }) {
     {
       id: 1,
       ListItemText: 'Customer Management',
-      ListItemIcon: 'manage_accounts',
+      ListItemIcon: 'perm_identity',
       ListItemPath: '',
       SubMenu: [
         {
           ListItemText: 'Customer',
-          ListItemIcon: 'support_agent',
+          ListItemIcon: 'remove',
           ListItemPath: '/customer',
           SubMenu: [],
         },
         {
           ListItemText: 'Customer Staff',
-          ListItemIcon: 'supervisor_account',
+          ListItemIcon: 'remove',
           ListItemPath: '/customer-staff',
           SubMenu: [],
         },
         {
           ListItemText: 'Merchant',
-          ListItemIcon: 'point_of_sale',
+          ListItemIcon: 'remove',
           ListItemPath: '/merchant',
           SubMenu: [],
         },
         {
           ListItemText: 'Merchant Staff',
-          ListItemIcon: 'supervisor_account',
+          ListItemIcon: 'remove',
           ListItemPath: '/merchant-staff',
           SubMenu: [],
         },
         {
           ListItemText: 'User',
-          ListItemIcon: 'perm_identity',
+          ListItemIcon: 'remove',
           ListItemPath: '/user',
           SubMenu: [],
         },
@@ -130,7 +135,7 @@ function CustomerManagement({ history }) {
     },
     {
       id: 2,
-      ListItemText: 'Customer Management',
+      ListItemText: 'Administration',
       ListItemIcon: 'move_to_inbox',
       ListItemPath: '',
       SubMenu: [
@@ -138,31 +143,14 @@ function CustomerManagement({ history }) {
           ListItemText: 'Customer',
           ListItemIcon: 'InboxIcon',
           ListItemPath: '/customer',
-          SubMenu: [],
-        },
-        {
-          ListItemText: 'Customer Staff',
-          ListItemIcon: 'InboxIcon',
-          ListItemPath: '/customer-staffs',
-          SubMenu: [],
-        },
-        {
-          ListItemText: 'Merchant',
-          ListItemIcon: 'InboxIcon',
-          ListItemPath: '/merchant',
-          SubMenu: [],
-        },
-        {
-          ListItemText: 'Merchant Staff',
-          ListItemIcon: 'InboxIcon',
-          ListItemPath: '/merchant-staff',
-          SubMenu: [],
-        },
-        {
-          ListItemText: 'User',
-          ListItemIcon: 'InboxIcon',
-          ListItemPath: '/user',
-          SubMenu: [],
+          SubMenu: [
+            {
+              ListItemText: 'Category',
+              ListItemIcon: '',
+              ListItemPath: '/customer-staffs',
+              SubMenu: [],
+            },
+          ],
         },
       ],
     },
@@ -246,7 +234,7 @@ function CustomerManagement({ history }) {
           {listItem.map((li, i) => (
             <Fragment>
               <ListItem button onClick={() => handleClick(li.id)}>
-                <ListItemIcon>
+                <ListItemIcon classes={{ root: classes.listItemIcon }}>
                   <Icon>{li.ListItemIcon}</Icon>
                 </ListItemIcon>
                 <ListItemText primary={li.ListItemText} />
@@ -260,14 +248,36 @@ function CustomerManagement({ history }) {
                   <List component="div" disablePadding>
                     <ListItem
                       button
-                      className={classes.nested}
+                      classes={{ gutters: classes.subListItem }}
                       // onClick={() => history.push(subLi.ListItemPath)}
                     >
-                      <ListItemIcon>
+                      <ListItemIcon classes={{ root: classes.listItemIcon }}>
                         <Icon>{subLi.ListItemIcon}</Icon>
                       </ListItemIcon>
                       <ListItemText primary={subLi.ListItemText} />
                     </ListItem>
+                    {subLi.SubMenu.map(subLiThird => (
+                      <Collapse
+                        in={activeList.includes(subLi.id)}
+                        timeout="auto"
+                        unmountOnExit
+                      >
+                        <List component="div" disablePadding>
+                          <ListItem
+                            button
+                            classes={{ gutters: classes.subListItem }}
+                            // onClick={() => history.push(subLiThird.ListItemPath)}
+                          >
+                            <ListItemIcon
+                              classes={{ root: classes.listItemIcon }}
+                            >
+                              <Icon>{subLiThird.ListItemIcon}</Icon>
+                            </ListItemIcon>
+                            <ListItemText primary={subLiThird.ListItemText} />
+                          </ListItem>
+                        </List>
+                      </Collapse>
+                    ))}
                   </List>
                 </Collapse>
               ))}
@@ -275,7 +285,7 @@ function CustomerManagement({ history }) {
           ))}
         </List>
       </Drawer>
-      <main className={classes.content}>
+      <main className={classes.customcontainer}>
         <div className={classes.toolbar} />
         <Customer />
       </main>

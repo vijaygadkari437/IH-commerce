@@ -6,14 +6,14 @@
 import React, { Fragment } from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import Footer from 'components/Footer';
+// import Footer from 'components/Footer';
 import LoginPage from '../LoginPage';
 import NotFoundPage from '../NotFoundPage/Loadable';
 import Customer from '../CustomerManagement/Customer';
 import CustomerStaff from '../CustomerManagement/CustomerStaff';
 import CustomerManagement from '../CustomerManagement';
-import Header from '../Layouts/Header';
-import Sidebar from '../Layouts/Sidebar';
+// import Header from '../Layouts/Header';
+// import Sidebar from '../Layouts/Sidebar';
 
 function App() {
   const myvar = '';

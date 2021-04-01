@@ -1,9 +1,6 @@
 import React from 'react';
-import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Form from '../../../components/FormFields';
-
-const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
   customergrid: {
@@ -16,9 +13,6 @@ const useStyles = makeStyles(theme => ({
   fullWidth: {
     gridColumnStart: 1,
     gridColumnEnd: 4,
-  },
-  root: {
-    display: 'flex',
   },
 }));
 
@@ -225,20 +219,10 @@ export default function Customer() {
     },
   ];
   return (
-    <div className={classes.root}>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      >
-        <div className={classes.drawerHeader} />
-
-        <div className={classes.customergrid}>
-          {fields.map(fields => (
-            <Form {...fields} />
-          ))}
-        </div>
-      </main>
+    <div className={classes.customergrid}>
+      {fields.map(fields => (
+        <Form {...fields} />
+      ))}
     </div>
   );
 }
