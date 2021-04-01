@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Form from '../../../components/FormFields';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
   customergrid: {
@@ -14,9 +15,22 @@ const useStyles = makeStyles(theme => ({
     gridColumnStart: 1,
     gridColumnEnd: 4,
   },
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
 }));
 
-export default function Customer() {
+export default function Customer({ openDrawer }) {
+  console.log(openDrawer, 'drawer');
   const classes = useStyles();
   const theme = useTheme();
   const fields = [
@@ -219,10 +233,13 @@ export default function Customer() {
     },
   ];
   return (
-    <div className={classes.customergrid}>
-      {fields.map(fields => (
-        <Form {...fields} />
-      ))}
-    </div>
+    <main className={classes.content}>
+      <div className={classes.toolbar} />
+      <div className={classes.customergrid}>
+        {fields.map(fields => (
+          <Form {...fields} />
+        ))}
+      </div>
+    </main>
   );
 }

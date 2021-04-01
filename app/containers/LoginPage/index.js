@@ -63,23 +63,21 @@ function LoginPage() {
   // });
 
   return (
-    <div className={classes.root}>
-      <Grid container>
-        <Grid item xs={7}>
-          <img src={LoginImg} className={classes.loginImg} />
-        </Grid>
-        <Grid item xs={5}>
-          <div className={classes.loginform}>
-            <Switch>
-              <Route path="/auth/login" component={Login} />
-              <Route path="/auth/reset-password" component={ResetPassword} />
-              <Route path="/auth/forgot-password" component={ForgotPassword} />
-              <Redirect from="/auth" to="/auth/login" />
-            </Switch>
-          </div>
-        </Grid>
+    <Grid container>
+      <Grid item xs={7}>
+        <img src={LoginImg} className={classes.loginImg} />
       </Grid>
-    </div>
+      <Grid item xs={5}>
+        <div className={classes.loginform}>
+          <Switch>
+            <Route path="/auth/login" component={Login} />
+            <Route path="/auth/reset-password" component={ResetPassword} />
+            <Route path="/auth/forgot-password" component={ForgotPassword} />
+            <Redirect from="/auth" to="/auth/login" />
+          </Switch>
+        </div>
+      </Grid>
+    </Grid>
   );
 }
 export default withRouter(LoginPage);
