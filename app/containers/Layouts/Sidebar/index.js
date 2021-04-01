@@ -19,14 +19,12 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
   },
   listItemIcon: {
-    // minWidth: 40,
+    minWidth: 40,
   },
   subListItem: {
     paddingLeft: 30,
   },
-  customcontainer: {
-    width: '100%',
-  },
+
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
@@ -73,31 +71,31 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
         {
           ListItemText: 'Customer',
           ListItemIcon: 'remove',
-          ListItemPath: '/customer',
+          ListItemPath: '/customer-management/customer',
           SubMenu: [],
         },
         {
           ListItemText: 'Customer Staff',
           ListItemIcon: 'remove',
-          ListItemPath: '/customer-staff',
+          ListItemPath: '/customer-management/customer-staff',
           SubMenu: [],
         },
         {
           ListItemText: 'Merchant',
           ListItemIcon: 'remove',
-          ListItemPath: '/merchant',
+          ListItemPath: '/customer-management/merchant',
           SubMenu: [],
         },
         {
           ListItemText: 'Merchant Staff',
           ListItemIcon: 'remove',
-          ListItemPath: '/merchant-staff',
+          ListItemPath: '/customer-management/merchant-staff',
           SubMenu: [],
         },
         {
           ListItemText: 'User',
           ListItemIcon: 'remove',
-          ListItemPath: '/user',
+          ListItemPath: '/customer-management/user',
           SubMenu: [],
         },
       ],
@@ -111,12 +109,12 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
         {
           ListItemText: 'Customer',
           ListItemIcon: 'InboxIcon',
-          ListItemPath: '/customer',
+          ListItemPath: '/admin',
           SubMenu: [
             {
               ListItemText: 'Category',
               ListItemIcon: '',
-              ListItemPath: '/customer-staffs',
+              ListItemPath: '/category',
               SubMenu: [],
             },
           ],
@@ -202,7 +200,7 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
                 <List component="div" disablePadding>
                   <ListItem
                     button
-                    className={classes.nested}
+                    className={classes.subListItem}
                     selected={subLi.ListItemPath === window.location.pathname}
                     onClick={() => history.push(subLi.ListItemPath)}
                   >

@@ -10,8 +10,6 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import LoginPage from '../LoginPage';
 import NotFoundPage from '../NotFoundPage/Loadable';
-import Customer from '../CustomerManagement/Customer';
-import CustomerStaff from '../CustomerManagement/CustomerStaff';
 import CustomerManagement from '../CustomerManagement';
 import Header from '../Layouts/Header';
 import Sidebar from '../Layouts/Sidebar';
@@ -48,8 +46,6 @@ function App() {
         )}
         <Switch>
           <Route path="/auth" component={LoginPage} />
-          <Route path="/customer" component={Customer} />
-          <Route path="/customer-staff" component={CustomerStaff} />
           <Route path="/customer-management" component={CustomerManagement} />
           <Route path="" component={NotFoundPage} />
         </Switch>

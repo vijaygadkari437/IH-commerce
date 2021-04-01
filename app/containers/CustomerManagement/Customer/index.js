@@ -1,38 +1,19 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Form from '../../../components/FormFields';
-import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
-  customergrid: {
+  customerGrid: {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr 1fr',
     gridColumnGap: 20,
     gridRowGap: 20,
     margin: 20,
   },
-  fullWidth: {
-    gridColumnStart: 1,
-    gridColumnEnd: 4,
-  },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
 }));
 
-export default function Customer({ openDrawer }) {
-  console.log(openDrawer, 'drawer');
+export default function Customer() {
   const classes = useStyles();
-  const theme = useTheme();
   const fields = [
     {
       label: 'Title',
@@ -233,13 +214,10 @@ export default function Customer({ openDrawer }) {
     },
   ];
   return (
-    <main className={classes.content}>
-      <div className={classes.toolbar} />
-      <div className={classes.customergrid}>
-        {fields.map(fields => (
-          <Form {...fields} />
-        ))}
-      </div>
-    </main>
+    <div className={classes.customerGrid}>
+      {fields.map(fields => (
+        <Form {...fields} />
+      ))}
+    </div>
   );
 }
