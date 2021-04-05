@@ -226,9 +226,10 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
 
   const handleDrawerClose = () => {
     setOpenDrawer(false);
+    activeList.length = 0;
   };
 
-  useEffect(() => {
+  const handleActiveDrawer = () => {
     let cur = false;
     for (let i = 0; i < listItem.length; i += 1) {
       for (let j = 0; j < listItem[i].SubMenu.length; j += 1) {
@@ -241,7 +242,15 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
         if (cur) break;
       }
     }
+  };
+
+  useEffect(() => {
+    handleActiveDrawer();
   }, []);
+
+  useEffect(() => {
+    openDrawer && handleActiveDrawer();
+  }, [openDrawer]);
 
   const handleClick = i => {
     if (activeList.includes(i)) {
@@ -282,6 +291,7 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
           <Fragment>
             <ListItem
               button
+              title={li.ListItemText}
               onClick={() =>
                 li.SubMenu.length > 0
                   ? handleClick(li.id)
