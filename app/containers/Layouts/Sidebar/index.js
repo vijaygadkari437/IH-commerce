@@ -10,7 +10,14 @@ import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { Box, Collapse, Icon, Typography, useTheme } from '@material-ui/core';
+import {
+  Box,
+  Collapse,
+  Hidden,
+  Icon,
+  Typography,
+  useTheme,
+} from '@material-ui/core';
 import { withRouter } from 'react-router';
 
 const drawerWidth = 280;
@@ -225,7 +232,7 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
     let cur = false;
     for (let i = 0; i < listItem.length; i += 1) {
       for (let j = 0; j < listItem[i].SubMenu.length; j += 1) {
-        console.log(listItem[i].id); //demo to represt optimised code
+        // console.log(listItem[i].id); //demo to represt optimised code
         if (listItem[i].SubMenu[j].ListItemPath === window.location.pathname) {
           setActiveList([listItem[i].id]);
           cur = true;
@@ -247,20 +254,8 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
     }
   };
 
-  return (
-    <Drawer
-      variant="permanent"
-      className={clsx(classes.drawer, {
-        [classes.drawerOpen]: openDrawer,
-        [classes.drawerClose]: !openDrawer,
-      })}
-      classes={{
-        paper: clsx({
-          [classes.drawerOpen]: openDrawer,
-          [classes.drawerClose]: !openDrawer,
-        }),
-      }}
-    >
+  const SidebarList = () => (
+    <Fragment>
       <div className={classes.toolbar}>
         <Box mx="auto">
           <Typography
@@ -361,7 +356,45 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
           </Fragment>
         ))}
       </List>
-    </Drawer>
+    </Fragment>
+  );
+
+  return (
+    <Fragment>
+      <Hidden xsDown>
+        <Drawer
+          variant="permanent"
+          className={clsx(classes.drawer, {
+            [classes.drawerOpen]: openDrawer,
+            [classes.drawerClose]: !openDrawer,
+          })}
+          classes={{
+            paper: clsx({
+              [classes.drawerOpen]: openDrawer,
+              [classes.drawerClose]: !openDrawer,
+            }),
+          }}
+        >
+          <SidebarList />
+        </Drawer>
+      </Hidden>
+      <Hidden smUp>
+        <Drawer
+          variant="temporary"
+          anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+          open={openDrawer}
+          onClose={handleDrawerClose}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+        >
+          <SidebarList />
+        </Drawer>
+      </Hidden>
+    </Fragment>
   );
 }
 
