@@ -198,7 +198,7 @@ function CustomerStaff({ history }) {
     let cur = false;
     for (let i = 0; i < listItem.length; i += 1) {
       for (let j = 0; j < listItem[i].SubMenu.length; j += 1) {
-        console.log(listItem[i].id); //demo to represt optimised code
+        console.log(listItem[i].id); // demo to represt optimised code
         if (listItem[i].SubMenu[j].ListItemPath === window.location.pathname) {
           setActiveList([listItem[i].id]);
           cur = true;
@@ -306,7 +306,9 @@ function CustomerStaff({ history }) {
                           <ListItem
                             button
                             className={classes.nested}
-                            selected={thirdLi.ListItemPath === window.location.pathname}
+                            selected={
+                              thirdLi.ListItemPath === window.location.pathname
+                            }
                             // onClick={() => history.push(subLi.ListItemPath)}
                           >
                             <ListItemIcon>
