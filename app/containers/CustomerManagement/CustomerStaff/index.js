@@ -14,18 +14,11 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-<<<<<<< HEAD
-// import InboxIcon from '@material-ui/icons/MoveToInbox';
-import { Collapse, Icon } from '@material-ui/core';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-=======
 import { Collapse, Icon } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { withRouter } from 'react-router';
 
->>>>>>> e2fd97f7a4689360deb17878600f70e9c48e4879
 // import ExpandLess from '@material-ui/icons/ExpandLess';
 // import ExpandMore from '@material-ui/icons/ExpandMore';
 // import StarBorder from '@material-ui/icons/StarBorder';
@@ -99,52 +92,43 @@ function CustomerStaff({ history }) {
   const theme = useTheme();
   const listItem = [
     {
-<<<<<<< HEAD
-      ListKey: 'mainCustomer',
-=======
       id: 1,
->>>>>>> e2fd97f7a4689360deb17878600f70e9c48e4879
       ListItemText: 'Customer Management',
       ListItemIcon: 'move_to_inbox',
       ListItemPath: '',
       SubMenu: [
         {
-          ListKey: 'secondCustomer',
+          id: 2,
           ListItemText: 'Customer',
           ListItemIcon: 'InboxIcon',
           ListItemPath: '/customer',
-<<<<<<< HEAD
           SubMenu: [
             {
-              ListKey: 'customerStaff',
+              id: 3,
               ListItemText: 'Customer Staff',
               ListItemIcon: 'InboxIcon',
-              ListItemPath: '/customer',
+              ListItemPath: '/customer-staff',
               SubMenu: [],
             },
           ],
-=======
-          SubMenu: [],
         },
         {
-          ListItemText: 'Customer Staff',
-          ListItemIcon: 'InboxIcon',
-          ListItemPath: '/customer-staff',
-          SubMenu: [],
-        },
-        {
+          id: 4,
           ListItemText: 'Merchant',
           ListItemIcon: 'InboxIcon',
           ListItemPath: '/merchant',
-          SubMenu: [],
+          SubMenu: [
+            {
+              id: 5,
+              ListItemText: 'Merchant Staff',
+              ListItemIcon: 'InboxIcon',
+              ListItemPath: '/merchant-staff',
+              SubMenu: [],
+            },
+          ],
         },
         {
-          ListItemText: 'Merchant Staff',
-          ListItemIcon: 'InboxIcon',
-          ListItemPath: '/merchant-staff',
-          SubMenu: [],
-        },
-        {
+          id: 6,
           ListItemText: 'User',
           ListItemIcon: 'InboxIcon',
           ListItemPath: '/user',
@@ -153,61 +137,55 @@ function CustomerStaff({ history }) {
       ],
     },
     {
-      id: 2,
-      ListItemText: 'Customer Management',
+      id: 7,
+      ListItemText: 'Customer Management 1',
       ListItemIcon: 'move_to_inbox',
       ListItemPath: '',
       SubMenu: [
         {
-          ListItemText: 'Customer',
+          id: 8,
+          ListItemText: 'Customer 1',
           ListItemIcon: 'InboxIcon',
-          ListItemPath: '/customer',
-          SubMenu: [],
->>>>>>> e2fd97f7a4689360deb17878600f70e9c48e4879
-        },
-
-        {
-<<<<<<< HEAD
-          ListKey: 'secondMerchant',
-=======
-          ListItemText: 'Customer Staff',
-          ListItemIcon: 'InboxIcon',
-          ListItemPath: '/customer-staffs',
-          SubMenu: [],
-        },
-        {
->>>>>>> e2fd97f7a4689360deb17878600f70e9c48e4879
-          ListItemText: 'Merchant',
-          ListItemIcon: 'InboxIcon',
-          ListItemPath: '/merchant',
+          ListItemPath: '/customer1',
           SubMenu: [
             {
-              ListKey: 'merchantStaff',
-              ListItemText: 'Merchant Staff',
+              id: 9,
+              ListItemText: 'Customer Staff 1',
               ListItemIcon: 'InboxIcon',
-              ListItemPath: '/merchant-staff',
+              ListItemPath: '/customer-staffs1',
+              SubMenu: [],
+            },
+          ],
+        },
+        {
+          id: 10,
+          ListItemText: 'Merchant 1',
+          ListItemIcon: 'InboxIcon',
+          ListItemPath: '/merchant1',
+          SubMenu: [
+            {
+              id: 11,
+              ListItemText: 'Merchant Staff 1',
+              ListItemIcon: 'InboxIcon',
+              ListItemPath: '/merchant-staff1',
               SubMenu: [],
             },
           ],
         },
 
         {
-          ListItemText: 'User',
+          id: 12,
+          ListItemText: 'User 1',
           ListItemIcon: 'InboxIcon',
-          ListItemPath: '/user',
+          ListItemPath: '/user1',
           SubMenu: [],
         },
       ],
     },
   ];
-<<<<<<< HEAD
-  const [openDrawer, setOpenDrawer] = React.useState(true);
-  const [openList, setOpenList] = React.useState([]);
-=======
   const [openDrawer, setOpenDrawer] = useState(true);
   const [activeList, setActiveList] = useState([]);
 
->>>>>>> e2fd97f7a4689360deb17878600f70e9c48e4879
   const handleDrawerOpen = () => {
     setOpenDrawer(true);
   };
@@ -216,21 +194,6 @@ function CustomerStaff({ history }) {
     setOpenDrawer(false);
   };
 
-<<<<<<< HEAD
-  const handleClick = menu => {
-    // console.log('handleClick called ', menu);
-    const newOpenList = [...openList];
-
-    if (newOpenList.includes(menu)) {
-      const index = newOpenList.indexOf(menu);
-      if (index > -1) {
-        newOpenList.splice(index, 1);
-      }
-    } else {
-      newOpenList.push(menu);
-    }
-    setOpenList(newOpenList);
-=======
   useEffect(() => {
     let cur = false;
     for (let i = 0; i < listItem.length; i += 1) {
@@ -252,10 +215,9 @@ function CustomerStaff({ history }) {
         activeList.splice(activeList.indexOf(i), 1); // delete the present item
       setActiveList([...activeList]); // set the new array without this item
     } else {
-      activeList.length = 0;
+      // activeList.length = 0;
       setActiveList([...activeList, i]);
     }
->>>>>>> e2fd97f7a4689360deb17878600f70e9c48e4879
   };
 
   return (
@@ -310,60 +272,12 @@ function CustomerStaff({ history }) {
         <List>
           {listItem.map(li => (
             <Fragment>
-<<<<<<< HEAD
-              <ListItem button onClick={() => handleClick(li.ListKey)}>
-=======
               <ListItem button onClick={() => handleClick(li.id)}>
->>>>>>> e2fd97f7a4689360deb17878600f70e9c48e4879
                 <ListItemIcon>
                   <Icon>{li.ListItemIcon}</Icon>
                 </ListItemIcon>
                 <ListItemText primary={li.ListItemText} />
               </ListItem>
-<<<<<<< HEAD
-              <Collapse
-                in={openList.includes(li.ListKey)}
-                timeout="auto"
-                unmountOnExit
-              >
-                <List component="div" disablePadding>
-                  {li.SubMenu.map(subli => (
-                    <Fragment>
-                      <ListItem
-                        button
-                        className={classes.nested}
-                        onClick={() => handleClick(subli.ListKey)}
-                      >
-                        <ListItemIcon>
-                          <Icon>{subli.ListItemIcon}</Icon>
-                        </ListItemIcon>
-                        <ListItemText primary={subli.ListItemText} />
-                      </ListItem>
-                      <Collapse
-                        in={openList.includes(subli.ListKey)}
-                        timeout="auto"
-                        unmountOnExit
-                      >
-                        <List component="div" disablePadding>
-                          {subli.SubMenu.map(thirdli => (
-                            <ListItem
-                              button
-                              className={classes.nested}
-                              onClick={() => handleClick(thirdli.ListKey)}
-                            >
-                              <ListItemIcon>
-                                <Icon>{thirdli.ListItemIcon}</Icon>
-                              </ListItemIcon>
-                              <ListItemText primary={thirdli.ListItemText} />
-                            </ListItem>
-                          ))}
-                        </List>
-                      </Collapse>
-                    </Fragment>
-                  ))}
-                </List>
-              </Collapse>
-=======
               {li.SubMenu.map(subLi => (
                 <Collapse
                   in={activeList.includes(li.id)}
@@ -375,17 +289,37 @@ function CustomerStaff({ history }) {
                       button
                       className={classes.nested}
                       selected={subLi.ListItemPath === window.location.pathname}
-                      // onClick={() => history.push(subLi.ListItemPath)}
+                      onClick={() => handleClick(subLi.id)}
                     >
                       <ListItemIcon>
                         <Icon>{subLi.ListItemIcon}</Icon>
                       </ListItemIcon>
                       <ListItemText primary={subLi.ListItemText} />
                     </ListItem>
+                    {subLi.SubMenu.map(thirdLi => (
+                      <Collapse
+                        in={activeList.includes(subLi.id)}
+                        timeout="auto"
+                        unmountOnExit
+                      >
+                        <List component="div" disablePadding>
+                          <ListItem
+                            button
+                            className={classes.nested}
+                            selected={thirdLi.ListItemPath === window.location.pathname}
+                            // onClick={() => history.push(subLi.ListItemPath)}
+                          >
+                            <ListItemIcon>
+                              <Icon>{thirdLi.ListItemIcon}</Icon>
+                            </ListItemIcon>
+                            <ListItemText primary={thirdLi.ListItemText} />
+                          </ListItem>
+                        </List>
+                      </Collapse>
+                    ))}
                   </List>
                 </Collapse>
               ))}
->>>>>>> e2fd97f7a4689360deb17878600f70e9c48e4879
             </Fragment>
           ))}
         </List>
