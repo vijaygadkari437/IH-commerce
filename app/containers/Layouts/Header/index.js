@@ -57,7 +57,13 @@ export default function Header({ openDrawer, setOpenDrawer }) {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h2" noWrap>
+        <Typography
+          variant="h2"
+          noWrap
+          className={clsx({
+            [classes.hide]: openDrawer,
+          })}
+        >
           IH Commerce
         </Typography>
       </Toolbar>

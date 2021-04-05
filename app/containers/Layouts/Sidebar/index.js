@@ -10,7 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { Collapse, Icon, useTheme } from '@material-ui/core';
+import { Box, Collapse, Icon, Typography, useTheme } from '@material-ui/core';
 import { withRouter } from 'react-router';
 
 const drawerWidth = 280;
@@ -262,6 +262,17 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
       }}
     >
       <div className={classes.toolbar}>
+        <Box mx="auto">
+          <Typography
+            variant="h2"
+            noWrap
+            className={clsx({
+              [classes.hide]: openDrawer,
+            })}
+          >
+            IH Commerce
+          </Typography>
+        </Box>
         <IconButton onClick={handleDrawerClose}>
           {theme.direction === 'rtl' ? (
             <ChevronRightIcon />
