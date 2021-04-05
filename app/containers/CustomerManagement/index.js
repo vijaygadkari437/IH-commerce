@@ -7,6 +7,7 @@ import CustomerStaff from '../CustomerManagement/CustomerStaff';
 import Merchant from '../CustomerManagement/Merchant';
 import MerchantStaff from '../CustomerManagement/MerchantStaff';
 import User from '../CustomerManagement/User';
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   fullWidth: {
@@ -24,33 +25,33 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    backgroundColor: '#f4f6f8',
   },
 }));
 
 function CustomerManagement() {
-    const classes = useStyles();
-    const theme = useTheme();
+  const classes = useStyles();
+  const theme = useTheme();
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
-      <Switch>
-        <Route path="/customer-management/customer" component={Customer} />
-        <Route
-          path="/customer-management/customer-staff"
-          component={CustomerStaff}
-        />
-        <Route path="/customer-management/merchant" component={Merchant} />
-        <Route
-          path="/customer-management/merchant-staff"
-          component={MerchantStaff}
-        />
-        <Route
-          path="/customer-management/user"
-          component={User}
-        />
-      </Switch>
+      <Container maxWidth="md">
+        <Switch>
+          <Route path="/customer-management/customer" component={Customer} />
+          <Route
+            path="/customer-management/customer-staff"
+            component={CustomerStaff}
+          />
+          <Route path="/customer-management/merchant" component={Merchant} />
+          <Route
+            path="/customer-management/merchant-staff"
+            component={MerchantStaff}
+          />
+          <Route path="/customer-management/user" component={User} />
+        </Switch>
+      </Container>
     </main>
   );
-};
+}
 
 export default withRouter(CustomerManagement);

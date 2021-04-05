@@ -1,15 +1,17 @@
 import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Form from '../../../components/FormFields';
-import FormCard from '../../../components/FormCard';
+import FormHeading from '../../../components/FormHeading';
 
 const useStyles = makeStyles(theme => ({
   customerGrid: {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr 1fr',
-    gridColumnGap: 20,
-    gridRowGap: 20,
-    margin: 20,
+    gridGap: 20,
+    boxShadow: '0 0 0 1px rgba(63, 63, 68, 0.05)',
+    backgroundColor: '#fff',
+    padding: 30,
+    borderRadius: 4,
   },
 }));
 
@@ -212,7 +214,7 @@ export default function Customer() {
   ];
   return (
     <Fragment>
-      <FormCard />
+      <FormHeading label="Customer" />
       <div className={classes.customerGrid}>
         {fields.map(fields => (
           <Form {...fields} />

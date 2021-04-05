@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Form from '../../../components/FormFields';
+import FormHeading from '../../../components/FormHeading';
 
 const useStyles = makeStyles(theme => ({
   customerGrid: {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr 1fr',
-    gridColumnGap: 20,
-    gridRowGap: 20,
-    margin: 20,
+    gridGap: 20,
   },
 }));
 
@@ -119,10 +118,13 @@ export default function Merchant() {
     },
   ];
   return (
-    <div className={classes.customerGrid}>
-      {fields.map(fields => (
-        <Form {...fields} />
-      ))}
-    </div>
+    <Fragment>
+      <FormHeading label="Merchant" />
+      <div className={classes.customerGrid}>
+        {fields.map(fields => (
+          <Form {...fields} />
+        ))}
+      </div>
+    </Fragment>
   );
 }

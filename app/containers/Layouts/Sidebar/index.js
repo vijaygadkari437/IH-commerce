@@ -13,7 +13,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { Collapse, Icon, useTheme } from '@material-ui/core';
 import { withRouter } from 'react-router';
 
-const drawerWidth = 260;
+const drawerWidth = 280;
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -73,30 +73,28 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
           ListItemText: 'Customer',
           ListItemIcon: 'remove',
           ListItemPath: '/customer-management/customer',
-          SubMenu: [
-            {
-              id: 3,
-              ListItemText: 'Customer Staff',
-              ListItemIcon: 'remove',
-              ListItemPath: '/customer-management/customer-staff',
-              SubMenu: [],
-            },
-          ],
+          SubMenu: [],
+        },
+        {
+          id: 3,
+          ListItemText: 'Customer Staff',
+          ListItemIcon: 'remove',
+          ListItemPath: '/customer-management/customer-staff',
+          SubMenu: [],
         },
         {
           id: 4,
           ListItemText: 'Merchant',
           ListItemIcon: 'remove',
           ListItemPath: '/customer-management/merchant',
-          SubMenu: [
-            {
-              id: 5,
-              ListItemText: 'Merchant Staff',
-              ListItemIcon: 'remove',
-              ListItemPath: '/customer-management/merchant-staff',
-              SubMenu: [],
-            },
-          ],
+          SubMenu: [],
+        },
+        {
+          id: 5,
+          ListItemText: 'Merchant Staff',
+          ListItemIcon: 'remove',
+          ListItemPath: '/customer-management/merchant-staff',
+          SubMenu: [],
         },
         {
           id: 6,
@@ -116,14 +114,100 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
         {
           id: 8,
           ListItemText: 'Customer',
-          ListItemIcon: 'InboxIcon',
-          ListItemPath: '/admin',
+          ListItemIcon: 'remove',
+          ListItemPath: '',
           SubMenu: [
             {
               id: 9,
               ListItemText: 'Category',
               ListItemIcon: '',
               ListItemPath: '/category',
+              SubMenu: [],
+            },
+            {
+              id: 10,
+              ListItemText: 'Category',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+          ],
+        },
+        {
+          id: 11,
+          ListItemText: 'Geography',
+          ListItemIcon: 'remove',
+          ListItemPath: '',
+          SubMenu: [
+            {
+              id: 12,
+              ListItemText: 'Country',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+            {
+              id: 13,
+              ListItemText: 'State',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+            {
+              id: 14,
+              ListItemText: 'Country/Region',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+            {
+              id: 15,
+              ListItemText: 'Region',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+          ],
+        },
+        {
+          id: 16,
+          ListItemText: 'Subscription Management',
+          ListItemIcon: 'remove',
+          ListItemPath: '',
+          SubMenu: [
+            {
+              id: 17,
+              ListItemText: 'Market Management',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+            {
+              id: 18,
+              ListItemText: 'APP Master',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+            {
+              id: 19,
+              ListItemText: 'Pricing Plan',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+            {
+              id: 20,
+              ListItemText: 'Bundle Plan',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+            {
+              id: 21,
+              ListItemText: 'Bundle Pricing',
+              ListItemIcon: '',
+              ListItemPath: '',
               SubMenu: [],
             },
           ],
@@ -190,7 +274,14 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
       <List>
         {listItem.map(li => (
           <Fragment>
-            <ListItem button onClick={() => handleClick(li.id)}>
+            <ListItem
+              button
+              onClick={() =>
+                li.SubMenu.length > 0
+                  ? handleClick(li.id)
+                  : history.push(li.ListItemPath)
+              }
+            >
               <ListItemIcon
                 classes={{
                   root: classes.listItemIcon,
@@ -211,7 +302,11 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
                     button
                     className={classes.subListItem}
                     selected={subLi.ListItemPath === window.location.pathname}
-                    onClick={() => handleClick(subLi.id)}
+                    onClick={() =>
+                      subLi.SubMenu.length > 0
+                        ? handleClick(subLi.id)
+                        : history.push(subLi.ListItemPath)
+                    }
                   >
                     <ListItemIcon
                       classes={{
