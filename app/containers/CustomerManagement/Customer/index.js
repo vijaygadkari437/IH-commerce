@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Form from '../../../components/FormFields';
+import FormCard from '../../../components/FormCard';
 
 const useStyles = makeStyles(theme => ({
   customerGrid: {
@@ -17,14 +18,10 @@ export default function Customer() {
   const fields = [
     {
       label: 'Title',
-      type: 'select',
+      textlabel: 'First name',
+      type: 'title',
       value: '',
       selectOption: [{ title: 'Mr' }, { title: 'Mrs.' }, { title: 'Miss' }],
-    },
-    {
-      label: 'First name',
-      type: 'text',
-      value: '',
     },
     {
       label: 'Middle name',
@@ -214,10 +211,13 @@ export default function Customer() {
     },
   ];
   return (
-    <div className={classes.customerGrid}>
-      {fields.map(fields => (
-        <Form {...fields} />
-      ))}
-    </div>
+    <Fragment>
+      <FormCard />
+      <div className={classes.customerGrid}>
+        {fields.map(fields => (
+          <Form {...fields} />
+        ))}
+      </div>
+    </Fragment>
   );
 }

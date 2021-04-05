@@ -19,6 +19,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Visibility from '@material-ui/icons/Visibility';
 import PhoneNoBox from '../PhoneNoBox';
 import Dropzone from '../Dropzone';
+import FormTitle from '../FormTitle';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
@@ -37,6 +38,7 @@ const useStyles = makeStyles(theme => ({
 export default function Form({
   label,
   selectOption,
+  textlabel,
   type,
   fieldType,
   value,
@@ -47,10 +49,9 @@ export default function Form({
 }) {
   const classes = useStyles();
   const [age, setAge] = React.useState('');
-
-  const handleChange = event => {
-    setAge(event.target.value);
-  };
+   const handleChange = event => {
+     setAge(event.target.value);
+   };
   const [values, setValues] = React.useState({
     amount: '',
     password: '',
@@ -184,6 +185,16 @@ export default function Form({
   }
   if (type === 'phone') {
     return <PhoneNoBox label={label} type={fieldType} />;
+  }
+  if (type === 'title') {
+    return (
+      <FormTitle
+        label={label}
+        type={fieldType}
+        selectOption={selectOption}
+        textlabel={textlabel}
+      />
+    );
   }
   if (type === 'dropzone') {
     return <Dropzone label={label} />;

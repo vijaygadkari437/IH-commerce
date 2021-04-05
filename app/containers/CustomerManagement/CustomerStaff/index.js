@@ -5,7 +5,7 @@ import Form from '../../../components/FormFields';
 const useStyles = makeStyles(theme => ({
   customerGrid: {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr 1fr',
+    gridTemplateColumns: '1fr 1fr 1fr',
     gridColumnGap: 20,
     gridRowGap: 20,
     margin: 20,
@@ -23,14 +23,10 @@ export default function CustomerStaff() {
     },
     {
       label: 'Title',
-      type: 'select',
+      textlabel: 'First name',
+      type: 'title',
       value: '',
       selectOption: [{ title: 'Mr' }, { title: 'Mrs.' }, { title: 'Miss' }],
-    },
-    {
-      label: 'First name',
-      type: 'text',
-      value: '',
     },
     {
       label: 'Middle name',
