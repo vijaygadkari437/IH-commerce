@@ -12,15 +12,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CustomerStaff() {
+export default function User() {
   const classes = useStyles();
   const fields = [
-    {
-      label: 'Customer',
-      type: 'select',
-      value: '',
-      selectOption: [{ title: 'Mr' }, { title: 'Mrs.' }, { title: 'Miss' }],
-    },
     {
       label: 'Title',
       textlabel: 'First name',
@@ -96,6 +90,26 @@ export default function CustomerStaff() {
       value: ' ',
       color: 'primary',
       variant: 'contained',
+    },
+    {
+      label: 'Company',
+      type: 'autocomplete',
+      value: '',
+      selectOption: [
+        { title: 'The Shawshank Redemption' },
+        { title: 'The Godfather' },
+        { title: 'The Godfather: Part II' },
+      ],
+    },
+    {
+      label: 'Entity',
+      type: 'autocomplete',
+      value: '',
+      selectOption: [
+        { title: 'The Shawshank Redemption' },
+        { title: 'The Godfather' },
+        { title: 'The Godfather: Part II' },
+      ],
     },
     {
       label: 'Role',

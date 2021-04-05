@@ -12,11 +12,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CustomerStaff() {
+export default function MerchantStaff() {
   const classes = useStyles();
   const fields = [
     {
       label: 'Customer',
+      type: 'select',
+      value: '',
+      selectOption: [{ title: 'Mr' }, { title: 'Mrs.' }, { title: 'Miss' }],
+    },
+    {
+      label: 'Merchant',
       type: 'select',
       value: '',
       selectOption: [{ title: 'Mr' }, { title: 'Mrs.' }, { title: 'Miss' }],
