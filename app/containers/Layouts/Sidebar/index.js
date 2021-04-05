@@ -69,30 +69,37 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
       ListItemPath: '',
       SubMenu: [
         {
+          id: 2,
           ListItemText: 'Customer',
           ListItemIcon: 'remove',
           ListItemPath: '/customer-management/customer',
-          SubMenu: [],
+          SubMenu: [
+            {
+              id: 3,
+              ListItemText: 'Customer Staff',
+              ListItemIcon: 'remove',
+              ListItemPath: '/customer-management/customer-staff',
+              SubMenu: [],
+            },
+          ],
         },
         {
-          ListItemText: 'Customer Staff',
-          ListItemIcon: 'remove',
-          ListItemPath: '/customer-management/customer-staff',
-          SubMenu: [],
-        },
-        {
+          id: 4,
           ListItemText: 'Merchant',
           ListItemIcon: 'remove',
           ListItemPath: '/customer-management/merchant',
-          SubMenu: [],
+          SubMenu: [
+            {
+              id: 5,
+              ListItemText: 'Merchant Staff',
+              ListItemIcon: 'remove',
+              ListItemPath: '/customer-management/merchant-staff',
+              SubMenu: [],
+            },
+          ],
         },
         {
-          ListItemText: 'Merchant Staff',
-          ListItemIcon: 'remove',
-          ListItemPath: '/customer-management/merchant-staff',
-          SubMenu: [],
-        },
-        {
+          id: 6,
           ListItemText: 'User',
           ListItemIcon: 'remove',
           ListItemPath: '/customer-management/user',
@@ -101,17 +108,19 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
       ],
     },
     {
-      id: 2,
+      id: 7,
       ListItemText: 'Administration',
       ListItemIcon: 'move_to_inbox',
       ListItemPath: '',
       SubMenu: [
         {
+          id: 8,
           ListItemText: 'Customer',
           ListItemIcon: 'InboxIcon',
           ListItemPath: '/admin',
           SubMenu: [
             {
+              id: 9,
               ListItemText: 'Category',
               ListItemIcon: '',
               ListItemPath: '/category',
@@ -149,7 +158,7 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
         activeList.splice(activeList.indexOf(i), 1); // delete the present item
       setActiveList([...activeList]); // set the new array without this item
     } else {
-      activeList.length = 0;
+      // activeList.length = 0;
       setActiveList([...activeList, i]);
     }
   };
@@ -179,7 +188,7 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
       </div>
       <Divider />
       <List>
-        {listItem.map((li, i) => (
+        {listItem.map(li => (
           <Fragment>
             <ListItem button onClick={() => handleClick(li.id)}>
               <ListItemIcon
@@ -202,7 +211,7 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
                     button
                     className={classes.subListItem}
                     selected={subLi.ListItemPath === window.location.pathname}
-                    onClick={() => history.push(subLi.ListItemPath)}
+                    onClick={() => handleClick(subLi.id)}
                   >
                     <ListItemIcon
                       classes={{
@@ -213,6 +222,33 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
                     </ListItemIcon>
                     <ListItemText primary={subLi.ListItemText} />
                   </ListItem>
+                  {subLi.SubMenu.map(thirdLi => (
+                    <Collapse
+                      in={activeList.includes(subLi.id)}
+                      timeout="auto"
+                      unmountOnExit
+                    >
+                      <List component="div" disablePadding>
+                        <ListItem
+                          button
+                          className={classes.subListItem}
+                          selected={
+                            thirdLi.ListItemPath === window.location.pathname
+                          }
+                          onClick={() => history.push(thirdLi.ListItemPath)}
+                        >
+                          <ListItemIcon
+                            classes={{
+                              root: classes.listItemIcon,
+                            }}
+                          >
+                            <Icon>{thirdLi.ListItemIcon}</Icon>
+                          </ListItemIcon>
+                          <ListItemText primary={thirdLi.ListItemText} />
+                        </ListItem>
+                      </List>
+                    </Collapse>
+                  ))}
                 </List>
               </Collapse>
             ))}
