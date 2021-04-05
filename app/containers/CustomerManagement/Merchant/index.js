@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CustomerStaff() {
+export default function Merchant() {
   const classes = useStyles();
   const fields = [
     {
@@ -89,6 +89,16 @@ export default function CustomerStaff() {
       label: 'Pincode',
       type: 'number',
       value: '',
+    },
+    {
+      label: 'Business category',
+      type: 'autocomplete',
+      value: '',
+      selectOption: [
+        { title: 'The Shawshank Redemption' },
+        { title: 'The Godfather' },
+        { title: 'The Godfather: Part II' },
+      ],
     },
     {
       label: 'Change Password',
