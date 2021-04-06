@@ -31,7 +31,10 @@ function App() {
         titleTemplate="%s - React.js Boilerplate"
         defaultTitle="React.js Boilerplate"
       >
-        <meta name="description" content="A React.js Boilerplate application" />
+        <meta
+          name="description"
+          content="A React.js Boilerplate application"
+        />
       </Helmet>
       <main
         className={

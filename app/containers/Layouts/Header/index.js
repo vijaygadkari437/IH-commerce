@@ -71,7 +71,7 @@ export default function Header({ openDrawer, setOpenDrawer }) {
             [classes.hide]: openDrawer,
           })}
         >
-          IH Commerce
+          Commersify
         </Typography>
       </Toolbar>
     </AppBar>

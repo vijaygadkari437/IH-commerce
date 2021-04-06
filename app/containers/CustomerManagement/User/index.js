@@ -124,7 +124,7 @@ export default function User() {
   ];
   return (
     <Fragment>
-      <FormHeading label="User" grid>
+      <FormHeading label="User" buttontext="Back"  grid>
         {fields.map(fields => (
           <Form {...fields} />
         ))}

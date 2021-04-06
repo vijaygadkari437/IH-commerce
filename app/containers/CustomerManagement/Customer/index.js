@@ -4,7 +4,7 @@ import FormHeading from '../../../components/FormHeading';
 
 export default function Customer() {
   return (
-    <FormHeading label="Customer">
+    <FormHeading label="Customer" buttontext="Add Customer">
       <DataTable />
     </FormHeading>
   );

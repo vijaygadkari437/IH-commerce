@@ -274,7 +274,7 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
               [classes.hide]: openDrawer,
             })}
           >
-            IH Commerce
+            Commersify
           </Typography>
         </Box>
         <IconButton onClick={handleDrawerClose}>

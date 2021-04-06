@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
     boxShadow: '0 0 0 1px rgba(63, 63, 68, 0.10)',
     backgroundColor: '#fff',
-    padding: 30,
     borderRadius: 4,
     marginBottom: 20,
   },
@@ -26,17 +27,36 @@ const useStyles = makeStyles(theme => ({
     },
   },
   wrapperHeading: {
+    marginBlockStart: 0,
+    marginBlockEnd: 0,
+    alignSelf: 'center',
     [theme.breakpoints.down('sm')]: {
       paddingLeft: 20,
     },
   },
+  flexButton: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: '20px 0',
+  },
+ 
 }));
 export default function FormHeading(props) {
-  const { label, children, grid } = props;
+  const { label, children, grid, buttontext } = props;
   const classes = useStyles();
   return (
     <Fragment>
-      <h2 className={classes.wrapperHeading}>{label}</h2>
+      <div className={classes.flexButton}>
+        <h2 className={classes.wrapperHeading}>{label}</h2>
+        <Link
+          to="/customer-management/customer/add-customer"
+          className={classes.wrapperLink}
+        >
+          <Button variant="contained" color="primary" size="small">
+            {buttontext}
+          </Button>
+        </Link>
+      </div>
       <div className={grid ? classes.wrapperWithGrid : classes.wrapper}>
         {children}
       </div>

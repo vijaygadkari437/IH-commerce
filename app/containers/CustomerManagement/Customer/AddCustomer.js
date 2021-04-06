@@ -199,10 +199,12 @@ export default function AddCustomer() {
     },
   ];
   return (
-    <FormHeading label="Customer">
-      {fields.map(fields => (
-        <Form {...fields} />
-      ))}
-    </FormHeading>
+    <Fragment>
+      <FormHeading label="Customer" grid>
+        {fields.map(fields => (
+          <Form {...fields} />
+        ))}
+      </FormHeading>
+    </Fragment>
   );
 }

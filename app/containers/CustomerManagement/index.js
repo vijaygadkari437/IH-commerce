@@ -6,6 +6,7 @@ import Customer from '../CustomerManagement/Customer';
 import CustomerStaff from '../CustomerManagement/CustomerStaff';
 import Merchant from '../CustomerManagement/Merchant';
 import MerchantStaff from '../CustomerManagement/MerchantStaff';
+import AddCustomer from '../CustomerManagement/Customer/AddCustomer';
 import User from '../CustomerManagement/User';
 import { Container } from '@material-ui/core';
 
@@ -46,6 +47,7 @@ function CustomerManagement() {
       <Container maxWidth="md" classes={{ root: classes.Container }}>
         <Switch>
           <Route path="/customer-management/customer" component={Customer} />
+          <Route path="/customer-management/customer/add-customer" component={AddCustomer} />
           <Route
             path="/customer-management/customer-staff"
             component={CustomerStaff}
