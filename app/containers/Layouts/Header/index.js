@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: 20,
     [theme.breakpoints.down('xs')]: {
       marginRight: 5,
     },

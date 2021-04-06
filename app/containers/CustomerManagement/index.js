@@ -26,6 +26,14 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     padding: theme.spacing(3),
     backgroundColor: '#f4f6f8',
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(0),
+    },
+  },
+  Container: {
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(0),
+    },
   },
 }));
 
@@ -35,7 +43,7 @@ function CustomerManagement() {
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
-      <Container maxWidth="md">
+      <Container maxWidth="md" classes={{ root: classes.Container }}>
         <Switch>
           <Route path="/customer-management/customer" component={Customer} />
           <Route

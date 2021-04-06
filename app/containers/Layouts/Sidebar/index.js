@@ -178,7 +178,7 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
         },
         {
           id: 16,
-          ListItemText: 'Subscription Management',
+          ListItemText: 'Subscription',
           ListItemIcon: 'remove',
           ListItemPath: '',
           SubMenu: [

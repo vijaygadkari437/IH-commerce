@@ -18,6 +18,17 @@ const useStyles = makeStyles(theme => ({
     padding: 30,
     borderRadius: 4,
     marginBottom: 20,
+    [theme.breakpoints.down('sm')]: {
+      display: 'flex',
+      flexDirection: 'column',
+      padding: 20,
+      borderRadius: 0,
+    },
+  },
+  wrapperHeading: {
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: 20,
+    },
   },
 }));
 export default function FormHeading(props) {
@@ -25,7 +36,7 @@ export default function FormHeading(props) {
   const classes = useStyles();
   return (
     <Fragment>
-      <h2>{label}</h2>
+      <h2 className={classes.wrapperHeading}>{label}</h2>
       <div className={grid ? classes.wrapperWithGrid : classes.wrapper}>
         {children}
       </div>
