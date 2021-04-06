@@ -23,7 +23,7 @@ function App() {
   const myvar = '';
   const classes = useStyles();
   // const theme = useTheme();
-  const [openDrawer, setOpenDrawer] = React.useState(false);
+  const [openDrawer, setOpenDrawer] = React.useState(true);
 
   return (
     <Fragment>

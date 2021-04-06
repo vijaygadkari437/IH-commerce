@@ -1,19 +1,8 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { Fragment } from 'react';
 import Form from '../../../components/FormFields';
-
-const useStyles = makeStyles(theme => ({
-  customerGrid: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr',
-    gridColumnGap: 20,
-    gridRowGap: 20,
-    margin: 20,
-  },
-}));
+import FormHeading from '../../../components/FormHeading';
 
 export default function Merchant() {
-  const classes = useStyles();
   const fields = [
     {
       label: 'Customer',
@@ -119,10 +108,12 @@ export default function Merchant() {
     },
   ];
   return (
-    <div className={classes.customerGrid}>
-      {fields.map(fields => (
-        <Form {...fields} />
-      ))}
-    </div>
+    <Fragment>
+      <FormHeading label="Merchant" grid>
+        {fields.map(fields => (
+          <Form {...fields} />
+        ))}
+      </FormHeading>
+    </Fragment>
   );
 }

@@ -10,10 +10,17 @@ import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { Box, Collapse, Icon, Typography, useTheme } from '@material-ui/core';
+import {
+  Box,
+  Collapse,
+  Hidden,
+  Icon,
+  Typography,
+  useTheme,
+} from '@material-ui/core';
 import { withRouter } from 'react-router';
 
-const drawerWidth = 260;
+const drawerWidth = 280;
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -73,30 +80,28 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
           ListItemText: 'Customer',
           ListItemIcon: 'remove',
           ListItemPath: '/customer-management/customer',
-          SubMenu: [
-            {
-              id: 3,
-              ListItemText: 'Customer Staff',
-              ListItemIcon: 'remove',
-              ListItemPath: '/customer-management/customer-staff',
-              SubMenu: [],
-            },
-          ],
+          SubMenu: [],
+        },
+        {
+          id: 3,
+          ListItemText: 'Customer Staff',
+          ListItemIcon: 'remove',
+          ListItemPath: '/customer-management/customer-staff',
+          SubMenu: [],
         },
         {
           id: 4,
           ListItemText: 'Merchant',
           ListItemIcon: 'remove',
           ListItemPath: '/customer-management/merchant',
-          SubMenu: [
-            {
-              id: 5,
-              ListItemText: 'Merchant Staff',
-              ListItemIcon: 'remove',
-              ListItemPath: '/customer-management/merchant-staff',
-              SubMenu: [],
-            },
-          ],
+          SubMenu: [],
+        },
+        {
+          id: 5,
+          ListItemText: 'Merchant Staff',
+          ListItemIcon: 'remove',
+          ListItemPath: '/customer-management/merchant-staff',
+          SubMenu: [],
         },
         {
           id: 6,
@@ -116,14 +121,100 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
         {
           id: 8,
           ListItemText: 'Customer',
-          ListItemIcon: 'InboxIcon',
-          ListItemPath: '/admin',
+          ListItemIcon: 'remove',
+          ListItemPath: '',
           SubMenu: [
             {
               id: 9,
               ListItemText: 'Category',
               ListItemIcon: '',
               ListItemPath: '/category',
+              SubMenu: [],
+            },
+            {
+              id: 10,
+              ListItemText: 'Category',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+          ],
+        },
+        {
+          id: 11,
+          ListItemText: 'Geography',
+          ListItemIcon: 'remove',
+          ListItemPath: '',
+          SubMenu: [
+            {
+              id: 12,
+              ListItemText: 'Country',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+            {
+              id: 13,
+              ListItemText: 'State',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+            {
+              id: 14,
+              ListItemText: 'Country/Region',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+            {
+              id: 15,
+              ListItemText: 'Region',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+          ],
+        },
+        {
+          id: 16,
+          ListItemText: 'Subscription Management',
+          ListItemIcon: 'remove',
+          ListItemPath: '',
+          SubMenu: [
+            {
+              id: 17,
+              ListItemText: 'Market Management',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+            {
+              id: 18,
+              ListItemText: 'APP Master',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+            {
+              id: 19,
+              ListItemText: 'Pricing Plan',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+            {
+              id: 20,
+              ListItemText: 'Bundle Plan',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+            {
+              id: 21,
+              ListItemText: 'Bundle Pricing',
+              ListItemIcon: '',
+              ListItemPath: '',
               SubMenu: [],
             },
           ],
@@ -135,13 +226,14 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
 
   const handleDrawerClose = () => {
     setOpenDrawer(false);
+    activeList.length = 0;
   };
 
-  useEffect(() => {
+  const handleActiveDrawer = () => {
     let cur = false;
     for (let i = 0; i < listItem.length; i += 1) {
       for (let j = 0; j < listItem[i].SubMenu.length; j += 1) {
-        console.log(listItem[i].id); //demo to represt optimised code
+        // console.log(listItem[i].id); //demo to represt optimised code
         if (listItem[i].SubMenu[j].ListItemPath === window.location.pathname) {
           setActiveList([listItem[i].id]);
           cur = true;
@@ -150,7 +242,15 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
         if (cur) break;
       }
     }
+  };
+
+  useEffect(() => {
+    handleActiveDrawer();
   }, []);
+
+  useEffect(() => {
+    openDrawer && handleActiveDrawer();
+  }, [openDrawer]);
 
   const handleClick = i => {
     if (activeList.includes(i)) {
@@ -163,20 +263,8 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
     }
   };
 
-  return (
-    <Drawer
-      variant="permanent"
-      className={clsx(classes.drawer, {
-        [classes.drawerOpen]: openDrawer,
-        [classes.drawerClose]: !openDrawer,
-      })}
-      classes={{
-        paper: clsx({
-          [classes.drawerOpen]: openDrawer,
-          [classes.drawerClose]: !openDrawer,
-        }),
-      }}
-    >
+  const SidebarList = () => (
+    <Fragment>
       <div className={classes.toolbar}>
         <Box mx="auto">
           <Typography
@@ -201,7 +289,15 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
       <List>
         {listItem.map(li => (
           <Fragment>
-            <ListItem button onClick={() => handleClick(li.id)}>
+            <ListItem
+              button
+              title={li.ListItemText}
+              onClick={() =>
+                li.SubMenu.length > 0
+                  ? handleClick(li.id)
+                  : history.push(li.ListItemPath)
+              }
+            >
               <ListItemIcon
                 classes={{
                   root: classes.listItemIcon,
@@ -222,7 +318,11 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
                     button
                     className={classes.subListItem}
                     selected={subLi.ListItemPath === window.location.pathname}
-                    onClick={() => handleClick(subLi.id)}
+                    onClick={() =>
+                      subLi.SubMenu.length > 0
+                        ? handleClick(subLi.id)
+                        : history.push(subLi.ListItemPath)
+                    }
                   >
                     <ListItemIcon
                       classes={{
@@ -266,7 +366,45 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
           </Fragment>
         ))}
       </List>
-    </Drawer>
+    </Fragment>
+  );
+
+  return (
+    <Fragment>
+      <Hidden xsDown>
+        <Drawer
+          variant="permanent"
+          className={clsx(classes.drawer, {
+            [classes.drawerOpen]: openDrawer,
+            [classes.drawerClose]: !openDrawer,
+          })}
+          classes={{
+            paper: clsx({
+              [classes.drawerOpen]: openDrawer,
+              [classes.drawerClose]: !openDrawer,
+            }),
+          }}
+        >
+          <SidebarList />
+        </Drawer>
+      </Hidden>
+      <Hidden smUp>
+        <Drawer
+          variant="temporary"
+          anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+          open={openDrawer}
+          onClose={handleDrawerClose}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+        >
+          <SidebarList />
+        </Drawer>
+      </Hidden>
+    </Fragment>
   );
 }
 

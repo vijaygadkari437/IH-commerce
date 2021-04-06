@@ -1,19 +1,8 @@
 import React, { Fragment } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Form from '../../../components/FormFields';
 import FormHeading from '../../../components/FormHeading';
 
-const useStyles = makeStyles(theme => ({
-  customerGrid: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr',
-    gridColumnGap: 20,
-    gridRowGap: 20,
-  },
-}));
-
-export default function User() {
-  const classes = useStyles();
+export default function AddCustomer() {
   const fields = [
     {
       label: 'Title',
@@ -41,6 +30,26 @@ export default function User() {
       label: 'Phone no',
       type: 'phone',
       fieldType: 'tel',
+      value: '',
+    },
+    {
+      label: 'Business type',
+      type: 'autocomplete',
+      value: '',
+      selectOption: [
+        { title: 'The Shawshank Redemption' },
+        { title: 'The Godfather' },
+        { title: 'The Godfather: Part II' },
+      ],
+    },
+    {
+      label: 'Business name',
+      type: 'text',
+      value: '',
+    },
+    {
+      label: 'Business website',
+      type: 'text',
       value: '',
     },
     {
@@ -85,11 +94,24 @@ export default function User() {
       value: '',
     },
     {
-      label: 'Change Password',
-      type: 'button',
-      value: ' ',
-      color: 'primary',
-      variant: 'contained',
+      label: 'Timezone',
+      type: 'autocomplete',
+      value: '',
+      selectOption: [
+        { title: 'The Shawshank Redemption' },
+        { title: 'The Godfather' },
+        { title: 'The Godfather: Part II' },
+      ],
+    },
+    {
+      label: 'Currency',
+      type: 'autocomplete',
+      value: '',
+      selectOption: [
+        { title: 'The Shawshank Redemption' },
+        { title: 'The Godfather' },
+        { title: 'The Godfather: Part II' },
+      ],
     },
     {
       label: 'Company',
@@ -112,7 +134,17 @@ export default function User() {
       ],
     },
     {
-      label: 'Role',
+      label: 'Channel Partner',
+      type: 'checkbox',
+      value: '',
+    },
+    {
+      label: 'Channel Partner Name',
+      type: 'text',
+      value: '',
+    },
+    {
+      label: 'Category',
       type: 'autocomplete',
       value: '',
       selectOption: [
@@ -121,15 +153,56 @@ export default function User() {
         { title: 'The Godfather: Part II' },
       ],
     },
+    {
+      label: 'Persona',
+      type: 'autocomplete',
+      value: '',
+      selectOption: [
+        { title: 'The Shawshank Redemption' },
+        { title: 'The Godfather' },
+        { title: 'The Godfather: Part II' },
+      ],
+    },
+    {
+      label: 'Account manager',
+      type: 'autocomplete',
+      value: '',
+      selectOption: [
+        { title: 'The Shawshank Redemption' },
+        { title: 'The Godfather' },
+        { title: 'The Godfather: Part II' },
+      ],
+    },
+    {
+      label: 'Tax type',
+      type: 'select',
+      value: '',
+      selectOption: [{ title: 'Mr' }, { title: 'Mrs.' }, { title: 'Miss' }],
+    },
+    {
+      label: 'Tax number',
+      type: 'text',
+      value: '',
+    },
+    {
+      label: 'Change Password',
+      type: 'button',
+      value: ' ',
+      color: 'primary',
+      variant: 'contained',
+    },
+    {
+      label: 'Attach Logo',
+      type: 'dropzone',
+      value: ' ',
+      fileClass: 'attachFileClass',
+    },
   ];
   return (
-    <Fragment>
-      <FormHeading label="User" />
-      <div className={classes.customerGrid}>
-        {fields.map(fields => (
-          <Form {...fields} />
-        ))}
-      </div>
-    </Fragment>
+    <FormHeading label="Customer">
+      {fields.map(fields => (
+        <Form {...fields} />
+      ))}
+    </FormHeading>
   );
 }
