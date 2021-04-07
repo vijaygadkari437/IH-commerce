@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import Form from '../../../components/FormFields';
-import FormHeading from '../../../components/FormHeading';
+import Form from '../../../../components/FormFields';
+import FormHeading from '../../../../components/FormHeading';
 
 export default function AddCustomer() {
   const fields = [
@@ -200,9 +200,16 @@ export default function AddCustomer() {
   ];
   return (
     <Fragment>
-      <FormHeading label="Customer" grid>
-        {fields.map(fields => (
-          <Form {...fields} />
+      <FormHeading
+        label="Customer"
+        grid
+        linkDetails={{
+          text: 'Back',
+          link: '/customer-management/customer/',
+        }}
+      >
+        {fields.map(field => (
+          <Form {...field} />
         ))}
       </FormHeading>
     </Fragment>

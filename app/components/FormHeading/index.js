@@ -39,23 +39,21 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
     margin: '20px 0',
   },
- 
 }));
 export default function FormHeading(props) {
-  const { label, children, grid, buttontext } = props;
+  const { label, children, grid, linkDetails } = props;
   const classes = useStyles();
   return (
     <Fragment>
       <div className={classes.flexButton}>
         <h2 className={classes.wrapperHeading}>{label}</h2>
-        <Link
-          to="/customer-management/customer/add-customer"
-          className={classes.wrapperLink}
-        >
-          <Button variant="contained" color="primary" size="small">
-            {buttontext}
-          </Button>
-        </Link>
+        {linkDetails && (
+          <Link to={linkDetails.link} className={classes.wrapperLink}>
+            <Button variant="contained" color="primary" size="small">
+              {linkDetails.text}
+            </Button>
+          </Link>
+        )}
       </div>
       <div className={grid ? classes.wrapperWithGrid : classes.wrapper}>
         {children}

@@ -2,13 +2,13 @@
 import React from 'react';
 import { Route, withRouter, Switch } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Customer from '../CustomerManagement/Customer';
-import CustomerStaff from '../CustomerManagement/CustomerStaff';
-import Merchant from '../CustomerManagement/Merchant';
-import MerchantStaff from '../CustomerManagement/MerchantStaff';
-import AddCustomer from '../CustomerManagement/Customer/AddCustomer';
-import User from '../CustomerManagement/User';
 import { Container } from '@material-ui/core';
+import Customer from './Customer';
+import CustomerStaff from './CustomerStaff';
+import Merchant from './Merchant';
+import MerchantStaff from './MerchantStaff';
+import AddCustomer from './Customer/AddCustomer';
+import User from './User';
 
 const useStyles = makeStyles(theme => ({
   fullWidth: {
@@ -46,8 +46,16 @@ function CustomerManagement() {
       <div className={classes.toolbar} />
       <Container maxWidth="md" classes={{ root: classes.Container }}>
         <Switch>
-          <Route path="/customer-management/customer" component={Customer} />
-          <Route path="/customer-management/customer/add-customer" component={AddCustomer} />
+          <Route
+            path="/customer-management/customer"
+            component={Customer}
+            exact
+          />
+          <Route
+            path="/customer-management/customer/add-customer"
+            exact
+            component={AddCustomer}
+          />
           <Route
             path="/customer-management/customer-staff"
             component={CustomerStaff}
