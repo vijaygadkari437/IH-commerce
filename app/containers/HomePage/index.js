@@ -62,7 +62,7 @@ export function HomePage({
         <title>Home Page</title>
         <meta
           name="description"
-          content="A React.js Boilerplate application homepage"
+          content="A Commersify application homepage"
         />
       </Helmet>
       <div>

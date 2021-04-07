@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import LoginImg from '../../images/login.jpg';
 import { Login, ResetPassword, ForgotPassword } from './components';
+import { Hidden } from '@material-ui/core';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -30,6 +31,9 @@ const useStyles = makeStyles(theme =>
       flex: 1,
       justifyContent: 'center',
       minHeight: '100vh',
+      [theme.breakpoints.down('sm')]: {
+        maxWidth: '90%',
+      },
       '& h2': {
         fontSize: 30,
         marginBottom: 10,
@@ -48,26 +52,15 @@ const useStyles = makeStyles(theme =>
 
 function LoginPage() {
   const classes = useStyles();
-  // const [values, setValues] = React.useState({
-  //   amount: '',
-  //   password: '',
-  //   weight: '',
-  //   weightRange: '',
-  //   showPassword: false,
-  // });
-  // const [state, setState] = React.useState({
-  //   checkedA: true,
-  //   checkedB: true,
-  //   checkedF: true,
-  //   checkedG: true,
-  // });
 
   return (
     <Grid container>
-      <Grid item xs={7}>
-        <img src={LoginImg} className={classes.loginImg} />
-      </Grid>
-      <Grid item xs={5}>
+      <Hidden xsDown>
+        <Grid item sm={7}>
+          <img src={LoginImg} className={classes.loginImg} />
+        </Grid>
+      </Hidden>
+      <Grid item xs={12} sm={5}>
         <div className={classes.loginform}>
           <Switch>
             <Route path="/auth/login" component={Login} />

@@ -26,6 +26,12 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
+  lists: {
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    borderRight: '1px solid rgba(0, 0, 0, 0.12)',
+    height: '100%',
+  },
   listItemIcon: {
     minWidth: 40,
   },
@@ -40,6 +46,8 @@ const useStyles = makeStyles(theme => ({
   },
   drawerOpen: {
     width: drawerWidth,
+    borderRight: 0,
+    overflowY: 'hidden',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -60,9 +68,13 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
+    backgroundColor: theme.palette.primary.dark,
+    padding: theme.spacing(0, 1, 0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
+  },
+  HeaderText: {
+    color: '#fff',
   },
 }));
 
@@ -276,17 +288,11 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
     <Fragment>
       <div className={classes.toolbar}>
         <Box mx="auto">
-          <Typography
-            variant="h2"
-            noWrap
-            className={clsx({
-              [classes.hide]: openDrawer,
-            })}
-          >
+          <Typography variant="h2" classes={{ root: classes.HeaderText }}>
             Commersify
           </Typography>
         </Box>
-        <IconButton onClick={handleDrawerClose}>
+        <IconButton onClick={handleDrawerClose} color="secondary">
           {theme.direction === 'rtl' ? (
             <ChevronRightIcon />
           ) : (
@@ -295,7 +301,11 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
         </IconButton>
       </div>
       <Divider />
-      <List>
+      <List
+        classes={{
+          root: classes.lists,
+        }}
+      >
         {listItem.map(li => (
           <Fragment>
             <ListItem
@@ -383,7 +393,7 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
       <Hidden xsDown>
         <Drawer
           variant="permanent"
-          className={clsx(classes.drawer, {
+          className={clsx(classes.drawer, classes.paper,{
             [classes.drawerOpen]: openDrawer,
             [classes.drawerClose]: !openDrawer,
           })}

@@ -39,6 +39,9 @@ const useStyles = makeStyles(theme => ({
       padding: theme.spacing(0, 3),
     },
   },
+  wrapperLink: {
+    textDecoration: 'none',
+  },
 }));
 export default function FormHeading(props) {
   const { label, children, grid, linkDetails } = props;

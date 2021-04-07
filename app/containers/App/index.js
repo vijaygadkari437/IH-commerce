@@ -27,14 +27,8 @@ function App() {
 
   return (
     <Fragment>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-      >
-        <meta
-          name="description"
-          content="A React.js Boilerplate application"
-        />
+      <Helmet titleTemplate="%s - Commersify" defaultTitle="Commersify">
+        <meta name="description" content="A Commersify application" />
       </Helmet>
       <main
         className={

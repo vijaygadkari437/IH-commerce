@@ -197,6 +197,11 @@ export default function AddCustomer() {
       value: ' ',
       fileClass: 'attachFileClass',
     },
+    {
+      label: 'Attach file',
+      type: 'file',
+      value: ' ',
+    },
   ];
   return (
     <Fragment>
