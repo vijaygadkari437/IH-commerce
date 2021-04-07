@@ -16,6 +16,7 @@ import {
   Hidden,
   Icon,
   Typography,
+  useMediaQuery,
   useTheme,
 } from '@material-ui/core';
 import { withRouter } from 'react-router';
@@ -222,6 +223,9 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
       ],
     },
   ];
+
+  const smDown = useMediaQuery(theme.breakpoints.down('sm'));
+
   const [activeList, setActiveList] = React.useState([]);
 
   const handleDrawerClose = () => {
@@ -263,6 +267,11 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
     }
   };
 
+  const handleRoute = route => {
+    history.push(route);
+    smDown && handleDrawerClose();
+  };
+
   const SidebarList = () => (
     <Fragment>
       <div className={classes.toolbar}>
@@ -295,7 +304,7 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
               onClick={() =>
                 li.SubMenu.length > 0
                   ? handleClick(li.id)
-                  : history.push(li.ListItemPath)
+                  : handleRoute(li.ListItemPath)
               }
             >
               <ListItemIcon
@@ -321,7 +330,7 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
                     onClick={() =>
                       subLi.SubMenu.length > 0
                         ? handleClick(subLi.id)
-                        : history.push(subLi.ListItemPath)
+                        : handleRoute(subLi.ListItemPath)
                     }
                   >
                     <ListItemIcon
@@ -346,7 +355,7 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
                           selected={
                             thirdLi.ListItemPath === window.location.pathname
                           }
-                          onClick={() => history.push(thirdLi.ListItemPath)}
+                          onClick={() => handleRoute(thirdLi.ListItemPath)}
                         >
                           <ListItemIcon
                             classes={{

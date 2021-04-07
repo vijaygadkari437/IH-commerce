@@ -156,11 +156,7 @@ const EnhancedTableToolbar = props => {
       })}
     >
       {numSelected > 0 ? (
-        <Typography
-          className={classes.title}
-          variant="h2"
-          component="div"
-        >
+        <Typography className={classes.title} variant="h2" component="div">
           {numSelected} selected
         </Typography>
       ) : (
@@ -169,8 +165,7 @@ const EnhancedTableToolbar = props => {
           variant="h2"
           id="tableTitle"
           component="div"
-        >
-        </Typography>
+        />
       )}
 
       {numSelected > 0 ? (
@@ -197,6 +192,9 @@ EnhancedTableToolbar.propTypes = {
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
+    [theme.breakpoints.down('sm')]: {
+      maxWidth: '100vw',
+    },
   },
   paper: {
     width: '100%',

@@ -30,14 +30,14 @@ const useStyles = makeStyles(theme => ({
     marginBlockStart: 0,
     marginBlockEnd: 0,
     alignSelf: 'center',
-    [theme.breakpoints.down('sm')]: {
-      paddingLeft: 20,
-    },
   },
   flexButton: {
     display: 'flex',
     justifyContent: 'space-between',
     margin: '20px 0',
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(0, 3),
+    },
   },
 }));
 export default function FormHeading(props) {
