@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import Form from '../../../components/FormFields';
-import FormHeading from '../../../components/FormHeading';
+import Form from '../../../../components/FormFields';
+import FormHeading from '../../../../components/FormHeading';
 
 export default function AddCustomer() {
   const fields = [
@@ -197,12 +197,26 @@ export default function AddCustomer() {
       value: ' ',
       fileClass: 'attachFileClass',
     },
+    {
+      label: 'Attach file',
+      type: 'file',
+      value: ' ',
+    },
   ];
   return (
-    <FormHeading label="Customer">
-      {fields.map(fields => (
-        <Form {...fields} />
-      ))}
-    </FormHeading>
+    <Fragment>
+      <FormHeading
+        label="Customer"
+        grid
+        linkDetails={{
+          text: 'Back',
+          link: '/customer-management/customer/',
+        }}
+      >
+        {fields.map(field => (
+          <Form {...field} />
+        ))}
+      </FormHeading>
+    </Fragment>
   );
 }

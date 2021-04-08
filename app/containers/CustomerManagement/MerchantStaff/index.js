@@ -115,12 +115,11 @@ export default function MerchantStaff() {
   ];
   return (
     <Fragment>
-      <FormHeading label="Merchant Staff" />
-      <div className={classes.customerGrid}>
+      <FormHeading label="Merchant Staff" buttontext="Back"  grid>
         {fields.map(fields => (
           <Form {...fields} />
         ))}
-      </div>
+      </FormHeading>
     </Fragment>
   );
 }

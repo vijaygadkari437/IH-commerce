@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -33,6 +33,12 @@ const useStyles = makeStyles(theme => ({
       width: 22,
     },
   },
+  input: {
+    display: 'none',
+  },
+  SelectIcon: {
+    top: 'auto',
+  },
 }));
 
 export default function Form({
@@ -49,9 +55,9 @@ export default function Form({
 }) {
   const classes = useStyles();
   const [age, setAge] = React.useState('');
-   const handleChange = event => {
-     setAge(event.target.value);
-   };
+  const handleChange = event => {
+    setAge(event.target.value);
+  };
   const [values, setValues] = React.useState({
     amount: '',
     password: '',
@@ -87,6 +93,7 @@ export default function Form({
     return (
       <Autocomplete
         id=""
+        classes={{ endAdornment: classes.SelectIcon }}
         options={selectOption}
         getOptionLabel={option => option.title}
         renderInput={params => (
@@ -198,6 +205,24 @@ export default function Form({
   }
   if (type === 'dropzone') {
     return <Dropzone label={label} />;
+  }
+  if (type === 'file') {
+    return (
+      <Fragment>
+        <input
+          accept="image/*"
+          className={classes.input}
+          id="contained-button-file"
+          multiple
+          type="file"
+        />
+        <label htmlFor="contained-button-file">
+          <Button variant="contained" color="primary" component="span">
+            Attach file
+          </Button>
+        </label>
+      </Fragment>
+    );
   }
   if (type === 'button') {
     return (

@@ -16,12 +16,15 @@ function countryToFlag(isoCode) {
 }
 
 const useStyles = makeStyles({
-  option: {
-    fontSize: 15,
-    '& > span': {
-      marginRight: 10,
-      fontSize: 18,
-    },
+  // option: {
+  //   fontSize: 15,
+  //   '& > span': {
+  //     marginRight: 10,
+  //     fontSize: 18,
+  //   },
+  // },
+  SelectIcon: {
+    top: 'auto',
   },
   phoneGrid: {
     display: 'grid',
@@ -40,9 +43,7 @@ export default function PhoneNoBox({ label, type }) {
         id="country-select-demo"
         style={{ width: 'auto' }}
         options={countries}
-        classes={{
-          option: classes.option,
-        }}
+        classes={{ endAdornment: classes.SelectIcon }}
         autoHighlight
         getOptionLabel={option => option.label}
         renderOption={option => (

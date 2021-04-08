@@ -124,12 +124,11 @@ export default function User() {
   ];
   return (
     <Fragment>
-      <FormHeading label="User" />
-      <div className={classes.customerGrid}>
+      <FormHeading label="User" buttontext="Back"  grid>
         {fields.map(fields => (
           <Form {...fields} />
         ))}
-      </div>
+      </FormHeading>
     </Fragment>
   );
 }

@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: 20,
     [theme.breakpoints.down('xs')]: {
       marginRight: 5,
     },
@@ -71,7 +71,7 @@ export default function Header({ openDrawer, setOpenDrawer }) {
             [classes.hide]: openDrawer,
           })}
         >
-          IH Commerce
+          Commersify
         </Typography>
       </Toolbar>
     </AppBar>
