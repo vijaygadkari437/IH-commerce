@@ -49,7 +49,7 @@ export default function FormHeading(props) {
   return (
     <Fragment>
       <div className={classes.flexButton}>
-        <h2 className={classes.wrapperHeading}>{label}</h2>
+        {label && <h2 className={classes.wrapperHeading}>{label}</h2>}
         {linkDetails && (
           <Link to={linkDetails.link} className={classes.wrapperLink}>
             <Button variant="contained" color="primary" size="small">
