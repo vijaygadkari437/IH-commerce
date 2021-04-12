@@ -4,10 +4,11 @@ import { Route, withRouter, Switch } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 import Customer from './Customer';
+import AddCustomer from './Customer/AddCustomer';
 import CustomerStaff from './CustomerStaff';
+import AddCustomerStaff from './CustomerStaff/AddCustomerStaff'
 import Merchant from './Merchant';
 import MerchantStaff from './MerchantStaff';
-import AddCustomer from './Customer/AddCustomer';
 import User from './User';
 
 const useStyles = makeStyles(theme => ({
@@ -58,7 +59,13 @@ function CustomerManagement() {
           />
           <Route
             path="/customer-management/customer-staff"
+            exact
             component={CustomerStaff}
+          />
+          <Route
+            path="/customer-management/customer-staff/add-customer-staff"
+            exact
+            component={AddCustomerStaff}
           />
           <Route path="/customer-management/merchant" component={Merchant} />
           <Route

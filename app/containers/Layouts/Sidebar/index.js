@@ -133,20 +133,27 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
       SubMenu: [
         {
           id: 8,
-          ListItemText: 'Customer',
+          ListItemText: 'Organization',
           ListItemIcon: 'remove',
           ListItemPath: '',
           SubMenu: [
             {
               id: 9,
-              ListItemText: 'Category',
+              ListItemText: 'Company',
               ListItemIcon: '',
-              ListItemPath: '/category',
+              ListItemPath: '/administration/organization/company',
               SubMenu: [],
             },
             {
               id: 10,
-              ListItemText: 'Category',
+              ListItemText: 'Entity',
+              ListItemIcon: '',
+              ListItemPath: '',
+              SubMenu: [],
+            },
+            {
+              id: 11,
+              ListItemText: 'Company Staff',
               ListItemIcon: '',
               ListItemPath: '',
               SubMenu: [],
@@ -154,13 +161,13 @@ function Sidebar({ openDrawer, setOpenDrawer, history }) {
           ],
         },
         {
-          id: 11,
+          id: 12,
           ListItemText: 'Geography',
           ListItemIcon: 'remove',
           ListItemPath: '',
           SubMenu: [
             {
-              id: 12,
+              id: 23,
               ListItemText: 'Country',
               ListItemIcon: '',
               ListItemPath: '',

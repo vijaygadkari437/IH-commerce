@@ -11,6 +11,7 @@ import { makeStyles } from '@material-ui/core';
 import LoginPage from '../LoginPage';
 import NotFoundPage from '../NotFoundPage/Loadable';
 import CustomerManagement from '../CustomerManagement';
+import Administration from '../Administration';
 import Header from '../Layouts/Header';
 import Sidebar from '../Layouts/Sidebar';
 import Demo from '../Demo';
@@ -45,6 +46,7 @@ function App() {
         <Switch>
           <Route path="/auth" component={LoginPage} />
           <Route path="/customer-management" component={CustomerManagement} />
+          <Route path="/administration" component={Administration} />
           <Route path="/demo" component={Demo} />
           <Route path="" component={NotFoundPage} />
         </Switch>

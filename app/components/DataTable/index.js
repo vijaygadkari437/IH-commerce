@@ -182,7 +182,7 @@ const DataTable = props => {
               .map((row, index) => {
                 return (
                   <TableRow hover tabIndex={-1} key={row.tableCell1}>
-                    <TableCell> {row.tableCell1}</TableCell>
+                    <TableCell>{row.tableCell1}</TableCell>
                     <TableCell>{row.tableCell2}</TableCell>
                     <TableCell>{row.tableCell3}</TableCell>
                     <TableCell>{row.tableCell4}</TableCell>

@@ -184,24 +184,24 @@ export default function AddCustomer() {
       type: 'text',
       value: '',
     },
-    {
-      label: 'Change Password',
-      type: 'button',
-      value: ' ',
-      color: 'primary',
-      variant: 'contained',
-    },
-    {
-      label: 'Attach Logo',
-      type: 'dropzone',
-      value: ' ',
-      fileClass: 'attachFileClass',
-    },
-    {
-      label: 'Attach file',
-      type: 'file',
-      value: ' ',
-    },
+    // {
+    //   label: 'Change Password',
+    //   type: 'button',
+    //   value: ' ',
+    //   color: 'primary',
+    //   variant: 'contained',
+    // },
+    // {
+    //   label: 'Attach Logo',
+    //   type: 'dropzone',
+    //   value: ' ',
+    //   fileClass: 'attachFileClass',
+    // },
+    // {
+    //   label: 'Attach file',
+    //   type: 'file',
+    //   value: ' ',
+    // },
   ];
   return (
     <Fragment>
