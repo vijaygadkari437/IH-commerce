@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import DataTable from '../../../components/DataTable';
 import FormHeading from '../../../components/FormHeading';
 import Form from '../../../components/FormFields';
-import { Divider } from '@material-ui/core';
+import { Button, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -11,6 +11,12 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#fff',
     borderRadius: 4,
     marginBottom: 20,
+  },
+  formFooter: {
+    marginBottom: 20,
+    boxShadow: '0 0 0 1px rgba(63, 63, 68, 0.10)',
+    backgroundColor: '#fff',
+    borderRadius: 4,
   },
 }));
 function createData(
@@ -215,18 +221,25 @@ export default function Customer() {
   const classes = useStyles();
   return (
     <Fragment>
-      <FormHeading
-        grid
-        label="Customer"
-        linkDetails={{
-          text: 'Add Customer',
-          link: '/customer-management/customer/add-customer',
-        }}
-      >
-        {fields.map(field => (
-          <Form {...field} />
-        ))}
-      </FormHeading>
+      <Fragment>
+        <FormHeading
+          grid
+          label="Customer"
+          linkDetails={{
+            text: 'Add Customer',
+            link: '/customer-management/customer/add-customer',
+          }}
+        >
+          {fields.map(field => (
+            <Form {...field} />
+          ))}
+        </FormHeading>
+
+        <div className={classes.formFooter}>
+          <Button>Refresh</Button>
+          <Button>Refresh</Button>
+        </div>
+      </Fragment>
       <FormHeading>
         <DataTable rows={rows} headCells={headCells} />
       </FormHeading>

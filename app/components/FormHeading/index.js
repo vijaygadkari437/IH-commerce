@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: '0 0 0 1px rgba(63, 63, 68, 0.10)',
     backgroundColor: '#fff',
     borderRadius: 4,
-    marginBottom: 20,
+    // marginBottom: 20,
   },
   wrapperWithGrid: {
     display: 'grid',
@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#fff',
     padding: 30,
     borderRadius: 4,
-    marginBottom: 20,
+    // marginBottom: 20,
     [theme.breakpoints.down('sm')]: {
       display: 'flex',
       flexDirection: 'column',
@@ -48,16 +48,18 @@ export default function FormHeading(props) {
   const classes = useStyles();
   return (
     <Fragment>
-      <div className={classes.flexButton}>
-        {label && <h2 className={classes.wrapperHeading}>{label}</h2>}
-        {linkDetails && (
-          <Link to={linkDetails.link} className={classes.wrapperLink}>
-            <Button variant="contained" color="primary" size="small">
-              {linkDetails.text}
-            </Button>
-          </Link>
-        )}
-      </div>
+      {(label || linkDetails) && (
+        <div className={classes.flexButton}>
+          {label && <h2 className={classes.wrapperHeading}>{label}</h2>}
+          {linkDetails && (
+            <Link to={linkDetails.link} className={classes.wrapperLink}>
+              <Button variant="contained" color="primary" size="small">
+                {linkDetails.text}
+              </Button>
+            </Link>
+          )}
+        </div>
+      )}
       <div className={grid ? classes.wrapperWithGrid : classes.wrapper}>
         {children}
       </div>
