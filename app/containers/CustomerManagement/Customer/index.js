@@ -18,6 +18,22 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#fff',
     borderRadius: 4,
   },
+  wrapperWithGrid: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr 1fr',
+    gridGap: 20,
+    boxShadow: '0 0 0 1px rgba(63, 63, 68, 0.10)',
+    backgroundColor: '#fff',
+    padding: 30,
+    borderRadius: 4,
+    // marginBottom: 20,
+    [theme.breakpoints.down('sm')]: {
+      display: 'flex',
+      flexDirection: 'column',
+      padding: 20,
+      borderRadius: 0,
+    },
+  },
 }));
 function createData(
   tableCell1,
@@ -223,18 +239,17 @@ export default function Customer() {
     <Fragment>
       <Fragment>
         <FormHeading
-          grid
           label="Customer"
           linkDetails={{
             text: 'Add Customer',
             link: '/customer-management/customer/add-customer',
           }}
-        >
+        />
+        <div className={classes.wrapperWithGrid}>
           {fields.map(field => (
             <Form {...field} />
           ))}
-        </FormHeading>
-
+        </div>
         <div className={classes.formFooter}>
           <Button>Refresh</Button>
           <Button>Refresh</Button>
